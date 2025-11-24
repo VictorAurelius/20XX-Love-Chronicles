@@ -30,3 +30,12 @@ Claude hãy tự thiết kế, sao cho aniamtion thật mượt
 đương nhiên là romantic
 
 hãy sửa lại plan task
+
+tôi muốn thêm 1 events trươc sinh nhật bạn trai: event đi du lịch Ninh Bình 10 ảnh, 2 video, ngoài ra tất cả các events khác mỗi events cũng sẽ có 2 video
+đặc biệt, video sẽ là dạng dọc nên cần display tốt
+
+hãy sửa lại req-1 cho phù hợp
+ngoài ra, có phải tôi cần bổ sung data trước khi bạn tạo code đúng không?
+
+tôi muốn hỏi là số lượng ảnh và video phải khớp hoàn toàn với mỗi events không?
+hãy tạo sẵn các folder cho các event hiện tại trong data

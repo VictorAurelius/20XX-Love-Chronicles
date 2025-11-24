@@ -5,7 +5,7 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
 
 **Theme**: Romantic với animations mượt mà
 **Deployment**: GitHub Pages + Docker support
-**Content**: 5 events chính với ~47 ảnh
+**Content**: 6 events chính với ~57 ảnh + 12 videos (vertical format)
 **Update workflow**: Manual copy files → Auto-generate events → Rebuild
 
 ---
@@ -55,18 +55,24 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
 
 #### Thư mục timeline events:
 - **Format**: `YYYY-MM-DD_event-slug/`
-- **Ví dụ cho 5 events hiện tại**:
-  - `2024-XX-XX_before-confession/` (~10 ảnh)
-  - `2024-XX-XX_confession-day/` (~5 ảnh)
-  - `2024-XX-XX_memories-before-birthday/` (~20 ảnh)
-  - `2024-09-30_boyfriend-birthday/` (~7 ảnh)
-  - `2024-XX-XX_girlfriend-birthday/` (~5 ảnh) **⭐ Trang chính - Special highlight**
+- **Ví dụ cho 6 events hiện tại**:
+  - `2024-XX-XX_before-confession/` (~10 ảnh + 2 videos)
+  - `2024-XX-XX_confession-day/` (~5 ảnh + 2 videos)
+  - `2024-XX-XX_memories-before-birthday/` (~20 ảnh + 2 videos)
+  - `2024-XX-XX_trip-ninh-binh/` (~10 ảnh + 2 videos) **🏞️ NEW EVENT**
+  - `2024-09-30_boyfriend-birthday/` (~7 ảnh + 2 videos)
+  - `2024-XX-XX_girlfriend-birthday/` (~5 ảnh + 2 videos) **⭐ Trang chính - Special highlight**
+
+**Tổng content**: ~57 ảnh + 12 videos (tất cả videos đều là vertical/portrait format 9:16)
 
 #### File ảnh/video trong mỗi event:
-- **cover.jpg**: Ảnh đại diện (bắt buộc, 1200x800px recommended)
-- **01.jpg, 02.jpg, 03.jpg...**: Ảnh sắp xếp theo thứ tự
-- **video-01.mp4, video-02.mp4**: Video (tối đa 50MB/file)
-- **note.txt**: Ghi chú văn bản, lời nhắn
+- **cover.jpg**: Ảnh đại diện (bắt buộc, 1200x800px landscape recommended)
+- **01.jpg, 02.jpg, 03.jpg...**: Ảnh sắp xếp theo thứ tự (có thể landscape hoặc portrait)
+- **video-01.mp4, video-02.mp4**: Video vertical/portrait format 9:16 (1080×1920 recommended)
+  - Mỗi event có đúng 2 videos
+  - Tối đa 50MB/file (hoặc 25MB nếu muốn tải nhanh hơn)
+  - Format: MP4 (H.264 codec)
+- **note.txt**: Ghi chú văn bản, lời nhắn (optional)
 
 #### File config JSON:
 - **timeline-data.json**: Metadata cho timeline
@@ -243,11 +249,17 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
 - [ ] Lazy loading cho tất cả ảnh ngoài viewport
 - [ ] Responsive images với srcset
 
-### Task 4.2: Video handling
-- [ ] Video player component với controls
-- [ ] Poster image từ cover.jpg
-- [ ] Lazy load video khi scroll đến
-- [ ] Fallback cho video không load được
+### Task 4.2: Video handling - VERTICAL VIDEO OPTIMIZED
+- [ ] Video player component với controls (custom hoặc dùng react-player)
+- [ ] **Vertical video layout** (9:16 aspect ratio):
+  - Desktop: Hiển thị centered với max-width phù hợp (không stretch toàn màn hình)
+  - Mobile: Full width, maintain aspect ratio
+  - Có thể dùng Instagram/TikTok-style player (centered, black bars ở 2 bên)
+- [ ] Poster image (thumbnail) từ video hoặc cover.jpg
+- [ ] Lazy load video khi scroll đến viewport
+- [ ] Fallback cho video không load được (show poster + error message)
+- [ ] Play/pause controls, mute/unmute
+- [ ] Optional: Video gallery slider (swipe giữa 2 videos trong event)
 
 ### Task 4.3: File loader utility
 - [ ] Function để scan folder timeline và load media:
@@ -537,9 +549,24 @@ export function getEventMedia(eventFolder: string) {
 - **Ảnh**: Optimize trước khi upload (max 2MB/ảnh, recommend 800-1200px width)
   - Format: JPG cho photos, PNG cho graphics, WebP cho modern browsers
   - Tools: TinyPNG, Squoosh, ImageOptim
-- **Video**: Compress heavily (max 50MB/file) hoặc embed YouTube/Vimeo
-  - GitHub Pages có limit 100MB/file, total repo < 1GB
-- **Tổng dung lượng**: ~47 ảnh × 1-2MB = ~50-100MB (OK cho GitHub Pages)
+- **Video**: Vertical format (9:16, 1080×1920), compress heavily
+  - **Target size**: 15-25MB/video (để tải nhanh, tổng ~300-400MB cho 12 videos)
+  - **Max size**: 50MB/video (GitHub Pages limit 100MB/file, total repo < 1GB)
+  - **Compression tools**:
+    - HandBrake (free, GUI, easy): Preset "Fast 1080p30" → adjust bitrate
+    - FFmpeg (CLI, powerful): `ffmpeg -i input.mp4 -vf "scale=1080:1920" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k output.mp4`
+    - Online: Clideo, FreeConvert (cho 1-2 videos)
+  - **Settings recommended**:
+    - Codec: H.264 (x264)
+    - Resolution: 1080×1920 (vertical 9:16)
+    - Frame rate: 30fps
+    - Bitrate: 3-4 Mbps (video) + 128 kbps (audio)
+    - CRF: 23-28 (lower = better quality, bigger file)
+  - **Alternative**: Embed từ YouTube/Vimeo nếu muốn tiết kiệm bandwidth (recommended nếu videos > 50MB)
+- **Tổng dung lượng ước tính**:
+  - Ảnh: ~57 ảnh × 1-2MB = ~57-114MB
+  - Videos: ~12 videos × 20MB (avg) = ~240MB
+  - **Total**: ~300-350MB (OK cho GitHub Pages < 1GB limit)
 
 ### 2. Naming Convention - STRICT RULES
 - **Folder names**: `YYYY-MM-DD_event-slug/`
@@ -575,13 +602,17 @@ export function getEventMedia(eventFolder: string) {
 ## ✅ CONFIRMED REQUIREMENTS (Đã xác nhận)
 
 ### Content & Data
-1. **Events**: 5 events chính
-   - Trước khi tỏ tình: ~10 ảnh
-   - Hôm tỏ tình: ~5 ảnh
-   - Kỉ niệm khác (trước 30/09): ~20 ảnh
-   - Sinh nhật bạn trai (30/09): ~7 ảnh
-   - **Sinh nhật bạn gái** (trang chính): ~5 ảnh ⭐ SPECIAL EVENT
-2. **Tổng ảnh**: ~47 ảnh (storage ~50-100MB, OK cho GitHub Pages)
+1. **Events**: 6 events chính (mỗi event có 2 videos)
+   - Trước khi tỏ tình: ~10 ảnh + 2 videos
+   - Hôm tỏ tình: ~5 ảnh + 2 videos
+   - Kỉ niệm khác (trước 30/09): ~20 ảnh + 2 videos
+   - **Du lịch Ninh Bình**: ~10 ảnh + 2 videos 🏞️ NEW EVENT
+   - Sinh nhật bạn trai (30/09): ~7 ảnh + 2 videos
+   - **Sinh nhật bạn gái** (trang chính): ~5 ảnh + 2 videos ⭐ SPECIAL EVENT
+2. **Tổng media**:
+   - **Ảnh**: ~57 ảnh (~57-114MB)
+   - **Videos**: 12 videos vertical 9:16 (~240MB)
+   - **Total storage**: ~300-350MB (OK cho GitHub Pages < 1GB)
 
 ### Deployment & Infrastructure
 3. **Hosting**: GitHub Pages (free, reliable)
@@ -607,7 +638,8 @@ Dự án được coi là thành công khi:
 - [ ] Auto-generate script hoạt động perfect (scan folders → generate JSON)
 - [ ] Lighthouse Performance score ≥ 90
 - [ ] Responsive trên mobile + desktop
-- [ ] Tất cả 5 events hiển thị đúng với đầy đủ ảnh
+- [ ] Tất cả 6 events hiển thị đúng với đầy đủ ảnh
+- [ ] **Vertical videos display đẹp** (không bị stretch, centered properly)
 
 ✅ **Design & UX**:
 - [ ] Romantic theme đẹp, cohesive
@@ -637,7 +669,108 @@ Dự án được coi là thành công khi:
 
 ---
 
-**Version**: 2.0 (Updated with confirmed requirements)
+---
+
+## 📦 DATA PREPARATION (Trước khi bắt đầu code)
+
+### Option 1: Full Data Ready (Recommended)
+**Tốt nhất**: Chuẩn bị đầy đủ data trước khi code
+- [ ] Tạo 6 folders trong `public/data/timeline/`:
+  ```
+  public/data/timeline/
+  ├── 2024-XX-XX_before-confession/
+  │   ├── cover.jpg
+  │   ├── 01.jpg ... 10.jpg
+  │   ├── video-01.mp4
+  │   ├── video-02.mp4
+  │   └── note.txt
+  ├── 2024-XX-XX_confession-day/
+  ├── 2024-XX-XX_memories-before-birthday/
+  ├── 2024-XX-XX_trip-ninh-binh/
+  ├── 2024-09-30_boyfriend-birthday/
+  └── 2024-XX-XX_girlfriend-birthday/
+  ```
+- [ ] Optimize ảnh (compress to 1-2MB each)
+- [ ] Compress videos (target 15-25MB each, vertical 9:16)
+- [ ] Tạo `note.txt` cho mỗi event (optional)
+- [ ] Chuẩn bị avatars: `public/data/avatars/avatar-boy.jpg`, `avatar-girl.jpg`
+
+**Ưu điểm**:
+- Code ngay được test với real data
+- Thấy được layout thực tế ngay trong development
+- Không phải làm lại việc test sau
+
+### Option 2: Placeholder Data (Fast Start)
+**Nếu chưa có data đầy đủ**: Dùng placeholder để bắt đầu code
+- [ ] Tạo 1-2 event folders mẫu với:
+  - 2-3 ảnh placeholder (có thể dùng https://picsum.photos/)
+  - 1 video placeholder (hoặc skip, code sẽ handle missing videos)
+  - `note.txt` với text mẫu
+- [ ] Sau khi code xong, thay thế bằng real data
+
+**Ưu điểm**:
+- Bắt đầu code nhanh hơn
+- Không cần optimize media ngay
+
+**Nhược điểm**:
+- Phải test lại khi có real data
+- Có thể gặp issues với file sizes, video formats sau
+
+### Option 3: No Data Yet (Code First)
+**Nếu hoàn toàn chưa có data**: Code trước, data sau
+- Code sẽ handle missing files gracefully
+- Dùng mock data trong code để test UI/UX
+- Khi có data thật, chỉ cần copy vào `public/data/timeline/`
+
+**Ưu điểm**:
+- Bắt đầu ngay không cần chờ
+- Focus vào code quality trước
+
+**Nhược điểm**:
+- Không thấy được layout thực tế
+- Risk: Phải refactor nhiều nếu data structure khác expectations
+
+---
+
+## 🎬 RECOMMENDED WORKFLOW
+
+**Tôi khuyên nên theo workflow này**:
+
+### Week 0 (Data Prep - 1-2 days)
+1. Collect tất cả ảnh/videos từ phone/cloud
+2. Organize vào folders theo naming convention
+3. Compress images với TinyPNG/Squoosh
+4. Compress videos với HandBrake (vertical 9:16, ~20MB each)
+5. Viết `note.txt` cho mỗi event
+
+### Week 1-4 (Development)
+Bắt đầu code với data đã chuẩn bị sẵn
+
+---
+
+## ❓ TRẢ LỜI CÂU HỎI CỦA BẠN
+
+> "Có phải tôi cần bổ sung data trước khi bạn tạo code đúng không?"
+
+**Trả lời**: **KHÔNG BẮT BUỘC**, nhưng **NÊN CÓ** ít nhất một vài data mẫu.
+
+**3 lựa chọn**:
+1. ✅ **Best**: Có đầy đủ 6 events với ảnh/video → Code & test ngay với real data
+2. ⚠️ **OK**: Có 1-2 events mẫu → Code được test basic, sau thêm data dần
+3. ❌ **Not ideal**: Không có data → Code blind, risk phải refactor nhiều sau
+
+**Khuyến nghị của tôi**:
+- Nếu bạn **đã có ảnh/video sẵn** → Chuẩn bị ngay (1-2 ngày) trước khi code
+- Nếu **chưa có** → Tôi code trước với placeholder, bạn chuẩn bị data song song
+
+**Bạn muốn chọn option nào?**
+1. Tôi chuẩn bị data trước, bạn chờ 1-2 ngày rồi code với real data
+2. Bạn code ngay với placeholder, tôi sẽ chuẩn bị data sau
+3. Tôi đã có data sẵn rồi, bạn có thể bắt đầu code ngay!
+
+---
+
+**Version**: 2.1 (Updated with Ninh Binh event + vertical videos + data prep guide)
 **Created**: 2025-11-24
 **Updated**: 2025-11-24
-**Status**: ✅ Ready to start development
+**Status**: ⏳ Waiting for data preparation confirmation
