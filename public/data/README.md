@@ -7,31 +7,36 @@
 ```
 public/data/
 ├── timeline/              # Events timeline (6 folders)
-│   ├── 2024-01-01_before-confession/
-│   ├── 2024-02-01_confession-day/
-│   ├── 2024-03-01_memories-before-birthday/
-│   ├── 2024-08-01_trip-ninh-binh/
-│   ├── 2024-09-30_boyfriend-birthday/
-│   └── 2024-12-01_girlfriend-birthday/
+│   ├── 2024-11-21_before-confession/
+│   ├── 2025-01-20_confession-day/
+│   ├── 2025-03-01_memories-before-birthday/
+│   ├── 2025-11-01_trip-ninh-binh/
+│   ├── 2025-09-30_boyfriend-birthday/
+│   └── 2025-12-10_girlfriend-birthday/
 ├── avatars/               # Avatar couple
 │   ├── avatar-boy.jpg
 │   └── avatar-girl.jpg
 ├── backgrounds/           # Background images (optional)
 │   └── hero-bg.jpg
-└── music/                 # Music files (optional)
-    ├── background-music.mp3
-    └── happy-birthday.mp3
+└── music/                 # Music files (optional) - SUPPORT MULTIPLE SONGS!
+    ├── 01-di-ve-nha.mp3
+    ├── 02-photograph.mp3
+    ├── 03-3107.mp3
+    ├── 04-yeu-la-cuoi.mp3
+    ├── ... (add as many as you want!)
+    └── birthday-special.mp3
 ```
 
 ## 🚀 Quy trình thêm media
 
-### 1. Rename event folders (nếu cần)
-Đổi ngày placeholder thành ngày thực:
-- `2024-01-01_before-confession` → `2024-MM-DD_before-confession`
-- `2024-02-01_confession-day` → `2024-MM-DD_confession-day`
-- v.v.
-
-**CHÚ Ý**: `2024-09-30_boyfriend-birthday` đã đúng ngày, không cần đổi!
+### 1. Event folders (đã rename xong!)
+✅ Các folders đã được rename với ngày thực tế:
+- `2024-11-21_before-confession` ✅
+- `2025-01-20_confession-day` ✅
+- `2025-03-01_memories-before-birthday` ✅
+- `2025-11-01_trip-ninh-binh` ✅
+- `2025-09-30_boyfriend-birthday` ✅
+- `2025-12-10_girlfriend-birthday` ✅ (Special event!)
 
 ### 2. Thêm files vào mỗi event folder
 

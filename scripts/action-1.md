@@ -42,3 +42,9 @@ hãy tạo sẵn các folder cho các event hiện tại trong data
 
 tôi vừa sửa lại tên các folder timeline, hãy sửa lại các file liên quan
 hãy đề cử các nguồn backgrounds và bài hát hợp lý cho context này
+
+tôi có nhiều file music vào thì bạn có thể tạo random music + random vòng phát nhạc mỗi khi vào web không? và web tĩnh có phát nhạc được không?
+
+nhưng tôi muốn vào 2 event birthday thì chỉ phát nhạc birthday
+
+tôi muốn trong folder music có 1 folder con cho nhạc birthday và đối với events birthday sẽ dùng riêng nhạc trong thư mục này (đương nhiên sẽ có nhiều file nhạc trong thư mục)

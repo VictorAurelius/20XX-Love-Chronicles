@@ -282,10 +282,42 @@ export function getEventMedia(eventFolder: string) {
 - [ ] Lightbox xem ảnh full size
 - [ ] Infinite scroll hoặc pagination
 
-### Task 5.2: Music player
-- [ ] Background music player (có thể tắt/bật)
-- [ ] Playlist cho từng event khác nhau
-- [ ] Auto-play music theo event đặc biệt
+### Task 5.2: Music player - ADVANCED WITH SHUFFLE
+- [ ] **Multiple songs support**: Auto-detect tất cả MP3 files trong `public/data/music/`
+- [ ] **Shuffle/Random modes**:
+  - Random: Mỗi lần load page → random 1 bài
+  - Shuffle: Random order playlist, không lặp cho đến hết
+  - Sequential: Play theo thứ tự
+- [ ] **Playback controls**:
+  - Play/Pause toggle
+  - Next/Previous track
+  - Volume slider
+  - Shuffle button (on/off)
+  - Repeat mode button (off/one/all)
+  - Now playing display (song name + progress bar)
+- [ ] **Auto-play behavior**:
+  - Không autoplay ngay (cần user gesture để comply với browser policy)
+  - Show prompt "Click to play music" với floating button
+  - Sau khi user click → start playlist
+- [ ] **Persistent preferences** (localStorage):
+  - Remember volume
+  - Remember shuffle/repeat mode
+  - Remember if user manually paused
+- [ ] **Mini player UI** (sticky bottom-right):
+  - Collapse/expand player
+  - Romantic design (rose gold theme)
+  - Show album art (couple avatar hoặc default)
+- [ ] **Event-specific music** (QUAN TRỌNG):
+  - **Birthday events**: Khi user vào/xem birthday events → CHỈ phát nhạc birthday, KHÔNG phát playlist bình thường
+    - **Birthday music folder**: `public/data/music/birthday/` chứa nhiều bài nhạc birthday
+    - Khi vào birthday events → Random/shuffle CHỈ trong folder `birthday/`
+    - `2025-09-30_boyfriend-birthday` → Shuffle trong `music/birthday/`
+    - `2025-12-10_girlfriend-birthday` → Shuffle trong `music/birthday/`
+    - Có thể có 3-10 bài birthday, tạo variety!
+  - **Other events**: Phát playlist background bình thường (các bài trong `music/` root, KHÔNG include `birthday/`)
+  - **Date-based auto-play**: Vào đúng ngày sinh nhật → Random 1 bài từ `birthday/` folder ngay khi load page
+  - **Event-based play**: Khi user click xem birthday story card → Switch sang birthday playlist (shuffle trong `birthday/`)
+  - **Exit behavior**: Khi user thoát khỏi birthday event → Resume playlist bình thường (root level)
 
 ### Task 5.3: Secret notes (optional)
 - [ ] Hidden notes unlock bằng password
