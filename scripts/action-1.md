@@ -62,3 +62,8 @@ cần chỉnh sửa:
 2. khoảng cách các timeline đang khá xa, hiển thị chưa hết ảnh cover
 
 vẫn còn tiếng việt: Before Confession, ngày, ...
+
+có 1 số bug khi display video và music:
+1. khi chuyển sang video khác thì cần dừng video cũ và phát luôn video mới
+2. khi lướt xuống phần video sẽ tự tắt nhạc nền vào phát video luôn
+3. khi mới vào home hoặc chuyển trang thì phải tự động phát nhạc

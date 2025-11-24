@@ -143,6 +143,10 @@ function generateTimelineData() {
         videos: media.videos.length,
         total: media.totalMedia,
       },
+      mediaFiles: {
+        images: media.images,
+        videos: media.videos,
+      },
       hasCover: media.hasCover,
       hasNote: media.hasNote,
       tags: [], // Can be auto-generated based on slug keywords

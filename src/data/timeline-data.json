@@ -1,5 +1,5 @@
 {
-  "generated": "2025-11-24T08:32:36.879Z",
+  "generated": "2025-11-24T08:58:49.510Z",
   "count": 6,
   "timeline": [
     {
@@ -13,6 +13,17 @@
         "images": 6,
         "videos": 0,
         "total": 6
+      },
+      "mediaFiles": {
+        "images": [
+          "01.jpg",
+          "02.jpg",
+          "03.jpg",
+          "04.jpg",
+          "05.jpg",
+          "06.jpg"
+        ],
+        "videos": []
       },
       "hasCover": true,
       "hasNote": false,
@@ -30,6 +41,12 @@
         "videos": 1,
         "total": 1
       },
+      "mediaFiles": {
+        "images": [],
+        "videos": [
+          "video-01.mp4"
+        ]
+      },
       "hasCover": true,
       "hasNote": false,
       "tags": []
@@ -45,6 +62,43 @@
         "images": 23,
         "videos": 8,
         "total": 31
+      },
+      "mediaFiles": {
+        "images": [
+          "01.jpeg",
+          "02.jpeg",
+          "03.jpeg",
+          "04.jpg",
+          "05.jpg",
+          "06.jpg",
+          "07.jpg",
+          "08.jpg",
+          "09.jpg",
+          "10.jpg",
+          "11.jpg",
+          "12.jpg",
+          "13.jpg",
+          "14.jpg",
+          "15.jpg",
+          "16.jpg",
+          "17.jpg",
+          "18.jpg",
+          "19.jpg",
+          "20.jpg",
+          "21.jpg",
+          "22.png",
+          "23.png"
+        ],
+        "videos": [
+          "video-01.mp4",
+          "video-02.mp4",
+          "video-03.mp4",
+          "video-04.mp4",
+          "video-05.mp4",
+          "video-06.mp4",
+          "video-07.mp4",
+          "video-08.mp4"
+        ]
       },
       "hasCover": true,
       "hasNote": false,
@@ -62,6 +116,14 @@
         "videos": 1,
         "total": 2
       },
+      "mediaFiles": {
+        "images": [
+          "01.jpg"
+        ],
+        "videos": [
+          "video-01.mp4"
+        ]
+      },
       "hasCover": true,
       "hasNote": false,
       "tags": []
@@ -78,6 +140,18 @@
         "videos": 2,
         "total": 6
       },
+      "mediaFiles": {
+        "images": [
+          "01.jpg",
+          "02.jpg",
+          "03.jpg",
+          "04.jpg"
+        ],
+        "videos": [
+          "video-01.mp4",
+          "video-02.mp4"
+        ]
+      },
       "hasCover": true,
       "hasNote": false,
       "tags": []
@@ -93,6 +167,17 @@
         "images": 6,
         "videos": 0,
         "total": 6
+      },
+      "mediaFiles": {
+        "images": [
+          "01.jpg",
+          "02.jpg",
+          "03.jpg",
+          "04.jpg",
+          "05.jpg",
+          "06.jpg"
+        ],
+        "videos": []
       },
       "hasCover": true,
       "hasNote": false,

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Lazy } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { formatDate } from '@/lib/date-utils';
 import timelineData from '@/data/timeline-data.json';
 
@@ -24,6 +24,10 @@ interface Event {
     images: number;
     videos: number;
     total: number;
+  };
+  mediaFiles: {
+    images: string[];
+    videos: string[];
   };
   hasCover: boolean;
 }
@@ -44,20 +48,16 @@ export default function EventDetail({ event }: EventDetailProps) {
   const nextEvent = currentIndex < allEvents.length - 1 ? allEvents[currentIndex + 1] : null;
 
   useEffect(() => {
-    // Generate image URLs
-    const imageUrls: string[] = [];
-    for (let i = 1; i <= event.mediaCount.images; i++) {
-      const paddedNum = i.toString().padStart(2, '0');
-      imageUrls.push(`/data/timeline/${event.folder}/${paddedNum}.jpg`);
-    }
+    // Generate image URLs from actual file list
+    const imageUrls = event.mediaFiles.images.map(
+      (filename) => `/data/timeline/${event.folder}/${filename}`
+    );
     setImages(imageUrls);
 
-    // Generate video URLs
-    const videoUrls: string[] = [];
-    for (let i = 1; i <= event.mediaCount.videos; i++) {
-      const paddedNum = i.toString().padStart(2, '0');
-      videoUrls.push(`/data/timeline/${event.folder}/video-${paddedNum}.mp4`);
-    }
+    // Generate video URLs from actual file list
+    const videoUrls = event.mediaFiles.videos.map(
+      (filename) => `/data/timeline/${event.folder}/${filename}`
+    );
     setVideos(videoUrls);
   }, [event]);
 
@@ -160,12 +160,11 @@ export default function EventDetail({ event }: EventDetailProps) {
             ) : (
               // Swiper carousel for other events
               <Swiper
-                modules={[Navigation, Pagination, Lazy]}
+                modules={[Navigation, Pagination]}
                 spaceBetween={20}
                 slidesPerView={1}
                 navigation
                 pagination={{ clickable: true }}
-                lazy={true}
                 breakpoints={{
                   640: { slidesPerView: 2 },
                   1024: { slidesPerView: 3 },
@@ -182,7 +181,7 @@ export default function EventDetail({ event }: EventDetailProps) {
                         src={src}
                         alt={`${event.title} - Photo ${index + 1}`}
                         fill
-                        className="object-cover swiper-lazy"
+                        className="object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>

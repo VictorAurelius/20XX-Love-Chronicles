@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import EventDetail from '@/components/EventDetail';
+import MusicPlayer from '@/components/MusicPlayer';
 import timelineData from '@/data/timeline-data.json';
 
 interface PageProps {
@@ -23,12 +24,20 @@ export default function EventPage({ params }: PageProps) {
     notFound();
   }
 
+  // Check if this is a birthday event
+  const isBirthdayEvent =
+    params.id === 'boyfriend-birthday' ||
+    params.id === 'girlfriend-birthday';
+
   return (
     <>
       <Header />
       <main className="pt-20">
         <EventDetail event={event} />
       </main>
+
+      {/* Music Player - with birthday mode for birthday events */}
+      <MusicPlayer isBirthdayMode={isBirthdayEvent} />
     </>
   );
 }
