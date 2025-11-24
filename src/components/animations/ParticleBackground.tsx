@@ -16,7 +16,7 @@ export default function ParticleBackground() {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const generatedParticles = Array.from({ length: 40 }, (_, i) => ({
+    const generatedParticles = Array.from({ length: 20 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

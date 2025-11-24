@@ -19,7 +19,7 @@ export default function FloatingHearts() {
   useEffect(() => {
     const heartEmojis = ['💕', '💖', '💗', '💝', '💞', '💓', '💟', '❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '🤎'];
 
-    const generatedHearts = Array.from({ length: 20 }, (_, i) => ({
+    const generatedHearts = Array.from({ length: 10 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

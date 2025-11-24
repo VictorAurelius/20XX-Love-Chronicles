@@ -115,3 +115,8 @@ ngoài ra hãy đề xuất thêm 1 số ý tưởng phát triển nữa, nhữn
 3. ở birthday của bạn gái: thêm box mở thư chúc của bạn trai, thiết kế thư chúc thật đẹp
 4. ở viền trái phải của web có thể trang trí thêm hoa, ..
 
+1. animation hơi slow, giật sau khi update
+2. chữ Văn Kiệt &Thùy Dương ở home cần thu nhỏ size để cùng trên 1 dòng
+3. thanh panel font chữ chưa đẹp
+4. khi chạy lại timeline thì bị tiếng anh trở lại
+5. chưa có thêm: 2. ở home, list event => thêm các dòng mô tả và cảm nhận ở khoảng trống đối diện của mỗi event

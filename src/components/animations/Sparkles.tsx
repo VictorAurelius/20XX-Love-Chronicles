@@ -15,7 +15,7 @@ export default function Sparkles() {
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
   useEffect(() => {
-    const generatedSparkles = Array.from({ length: 30 }, (_, i) => ({
+    const generatedSparkles = Array.from({ length: 15 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

@@ -169,10 +169,10 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
         <div className="flex items-center justify-between gap-4">
           {/* Track info */}
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-800 truncate">
+            <p className="text-base font-accent font-semibold text-gray-800 truncate">
               {currentTrack.title}
             </p>
-            <p className="text-xs text-gray-600">
+            <p className="text-sm font-accent text-romantic-rose">
               {isBirthdayMode ? 'Chế độ sinh nhật 🎂' : 'Nhạc lãng mạn 💕'}
             </p>
           </div>

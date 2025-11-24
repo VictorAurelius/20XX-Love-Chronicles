@@ -91,7 +91,7 @@ export default function Hero() {
         {/* Couple names */}
         <motion.div variants={itemVariants} className="mb-8">
           <motion.h1
-            className="text-6xl md:text-8xl lg:text-9xl font-heading font-bold text-gradient-romantic mb-4"
+            className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-gradient-romantic mb-4"
             animate={{
               scale: [1, 1.02, 1],
             }}
