@@ -104,3 +104,8 @@ data/music/01-le-duong.mp3:1  Failed to load resource: the server responded with
 push.2304.window.console.error @ 117-f71ccb93199bb2b6.js:1
 cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
 cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+
+
+tôi muốn nhiều animation trang trí hơn, hãy tạo req-2 để trang trí đẹp mắt hơn cho web
+
+ngoài ra hãy đề xuất thêm 1 số ý tưởng phát triển nữa, những vẫn phải là web tĩnh

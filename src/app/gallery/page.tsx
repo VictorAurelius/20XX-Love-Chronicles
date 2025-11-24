@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
+import ParticleBackground from '@/components/animations/ParticleBackground';
+import Sparkles from '@/components/animations/Sparkles';
 
 interface Event {
   id: string;
@@ -77,6 +79,10 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-romantic-warmWhite pb-20">
+      {/* Background animations */}
+      <ParticleBackground />
+      <Sparkles />
+
       {/* Hero Section */}
       <motion.div
         className="relative py-16 bg-gradient-romantic-2"

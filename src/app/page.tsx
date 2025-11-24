@@ -2,10 +2,20 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Timeline from '@/components/Timeline';
 import MusicPlayer from '@/components/MusicPlayer';
+import FloatingHearts from '@/components/animations/FloatingHearts';
+import Sparkles from '@/components/animations/Sparkles';
+import ParticleBackground from '@/components/animations/ParticleBackground';
+import AnimatedGradient from '@/components/animations/AnimatedGradient';
 
 export default function Home() {
   return (
     <>
+      {/* Background animations */}
+      <AnimatedGradient />
+      <ParticleBackground />
+      <Sparkles />
+      <FloatingHearts />
+
       <Header />
       <main>
         <Hero />

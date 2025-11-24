@@ -73,7 +73,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
       {/* Card content */}
       <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
         <motion.div
-          className="romantic-card p-6 hover:shadow-romantic-lg transition-all duration-300"
+          className="romantic-card p-6 hover-lift hover-shine"
           whileHover={{ scale: 1.02 }}
         >
           {/* Cover image */}
