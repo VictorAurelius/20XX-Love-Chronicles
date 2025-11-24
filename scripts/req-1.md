@@ -55,13 +55,13 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
 
 #### Thư mục timeline events:
 - **Format**: `YYYY-MM-DD_event-slug/`
-- **Ví dụ cho 6 events hiện tại**:
-  - `2024-XX-XX_before-confession/` (~10 ảnh + 2 videos)
-  - `2024-XX-XX_confession-day/` (~5 ảnh + 2 videos)
-  - `2024-XX-XX_memories-before-birthday/` (~20 ảnh + 2 videos)
-  - `2024-XX-XX_trip-ninh-binh/` (~10 ảnh + 2 videos) **🏞️ NEW EVENT**
-  - `2024-09-30_boyfriend-birthday/` (~7 ảnh + 2 videos)
-  - `2024-XX-XX_girlfriend-birthday/` (~5 ảnh + 2 videos) **⭐ Trang chính - Special highlight**
+- **6 events thực tế** (đã tạo folders):
+  - `2024-11-21_before-confession/` (~10 ảnh + 2 videos)
+  - `2025-01-20_confession-day/` (~5 ảnh + 2 videos)
+  - `2025-03-01_memories-before-birthday/` (~20 ảnh + 2 videos)
+  - `2025-11-01_trip-ninh-binh/` (~10 ảnh + 2 videos) **🏞️ NEW EVENT**
+  - `2025-09-30_boyfriend-birthday/` (~7 ảnh + 2 videos)
+  - `2025-12-10_girlfriend-birthday/` (~5 ảnh + 2 videos) **⭐ Trang chính - Special highlight**
 
 **Tổng content**: ~57 ảnh + 12 videos (tất cả videos đều là vertical/portrait format 9:16)
 
@@ -180,7 +180,7 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
       "avatar": "/data/avatars/avatar-girl.jpg",
       "nickname": "Em yêu"
     },
-    "startDate": "2024-01-14",
+    "startDate": "2025-01-20",
     "motto": "Yêu nhau mỗi ngày!"
   }
 }

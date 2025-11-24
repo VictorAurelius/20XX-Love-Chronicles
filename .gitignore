@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+build/
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+
+# ==================================================
+# PERSONAL DATA - IMPORTANT!
+# ==================================================
+# Uncomment the lines below if you DON'T want to commit
+# personal photos/videos to GitHub (recommended for privacy)
+#
+# Note: If you uncomment these, you'll need to manually
+# copy data files to deployment server, or use Git LFS
+# for large files.
+# ==================================================
+
+# Option 1: Ignore all data (most private)
+# public/data/
+
+# Option 2: Ignore only media files (keep structure)
+# public/data/timeline/**/*.jpg
+# public/data/timeline/**/*.png
+# public/data/timeline/**/*.mp4
+# public/data/timeline/**/*.mp3
+# public/data/avatars/*.jpg
+# public/data/avatars/*.png
+# public/data/backgrounds/*
+# public/data/music/*
+
+# Option 3: Keep README files only
+# public/data/**/!(README.md)
+
+# ==================================================
+# CURRENT SETTING: Commit everything (default)
+# If you want privacy, uncomment Option 1 or 2 above
+# ==================================================

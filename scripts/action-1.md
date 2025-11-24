@@ -39,3 +39,6 @@ ngoài ra, có phải tôi cần bổ sung data trước khi bạn tạo code đ
 
 tôi muốn hỏi là số lượng ảnh và video phải khớp hoàn toàn với mỗi events không?
 hãy tạo sẵn các folder cho các event hiện tại trong data
+
+tôi vừa sửa lại tên các folder timeline, hãy sửa lại các file liên quan
+hãy đề cử các nguồn backgrounds và bài hát hợp lý cho context này
