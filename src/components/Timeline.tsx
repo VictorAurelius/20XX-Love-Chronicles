@@ -83,6 +83,8 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
+              loading={index < 2 ? "eager" : "lazy"}
+              priority={index === 0}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 

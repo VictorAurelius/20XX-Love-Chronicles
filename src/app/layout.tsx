@@ -29,10 +29,23 @@ export const metadata: Metadata = {
   description: "A romantic timeline of our journey together 💕",
   keywords: ["love", "romance", "couple", "timeline", "memories"],
   authors: [{ name: "Love Chronicles" }],
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
   openGraph: {
     title: "20XX Love Chronicles",
     description: "Our love story, beautifully told",
     type: "website",
+    locale: "vi_VN",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

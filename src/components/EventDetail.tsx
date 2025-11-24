@@ -46,7 +46,6 @@ export default function EventDetail({ event }: EventDetailProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { pauseMusic } = useMusic();
   const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   // Get all events for navigation
   const allEvents = timelineData.timeline as Event[];
@@ -91,7 +90,6 @@ export default function EventDetail({ event }: EventDetailProps) {
   const handleSlideChange = useCallback((swiper: SwiperType) => {
     const newIndex = swiper.activeIndex;
     pauseAllVideosExcept(newIndex);
-    setCurrentVideoIndex(newIndex);
 
     // Auto-play the new video
     const newVideo = videoRefs.current.get(newIndex);
