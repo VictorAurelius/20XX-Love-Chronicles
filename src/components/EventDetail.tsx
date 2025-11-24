@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 import { formatDate } from '@/lib/date-utils';
 import timelineData from '@/data/timeline-data.json';
+import { useMusic } from '@/contexts/MusicContext';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -40,6 +42,9 @@ export default function EventDetail({ event }: EventDetailProps) {
   const [images, setImages] = useState<string[]>([]);
   const [videos, setVideos] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { pauseMusic, resumeMusic } = useMusic();
+  const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   // Get all events for navigation
   const allEvents = timelineData.timeline as Event[];
@@ -62,6 +67,32 @@ export default function EventDetail({ event }: EventDetailProps) {
   }, [event]);
 
   const isDailyMemories = event.id === 'daily-memories';
+
+  // Handle video play - pause music
+  const handleVideoPlay = useCallback(() => {
+    pauseMusic();
+  }, [pauseMusic]);
+
+  // Handle video pause/ended - resume music
+  const handleVideoPauseOrEnd = useCallback(() => {
+    resumeMusic();
+  }, [resumeMusic]);
+
+  // Pause all videos except the one at given index
+  const pauseAllVideosExcept = useCallback((activeIndex: number) => {
+    videoRefs.current.forEach((video, index) => {
+      if (index !== activeIndex && !video.paused) {
+        video.pause();
+      }
+    });
+  }, []);
+
+  // Handle swiper slide change - pause previous video
+  const handleSlideChange = useCallback((swiper: SwiperType) => {
+    const newIndex = swiper.activeIndex;
+    pauseAllVideosExcept(newIndex);
+    setCurrentVideoIndex(newIndex);
+  }, [pauseAllVideosExcept]);
 
   return (
     <div className="min-h-screen bg-romantic-warmWhite">
@@ -208,6 +239,7 @@ export default function EventDetail({ event }: EventDetailProps) {
                 slidesPerView={1}
                 navigation
                 pagination={{ clickable: true }}
+                onSlideChange={handleSlideChange}
                 className="vertical-video-swiper"
               >
                 {videos.map((src, index) => (
@@ -215,10 +247,16 @@ export default function EventDetail({ event }: EventDetailProps) {
                     <div className="flex justify-center">
                       <div className="relative w-full max-w-md aspect-[9/16] rounded-xl overflow-hidden shadow-romantic-lg bg-black">
                         <video
+                          ref={(el) => {
+                            if (el) videoRefs.current.set(index, el);
+                          }}
                           controls
                           className="w-full h-full object-contain"
                           preload="metadata"
                           playsInline
+                          onPlay={handleVideoPlay}
+                          onPause={handleVideoPauseOrEnd}
+                          onEnded={handleVideoPauseOrEnd}
                         >
                           <source src={src} type="video/mp4" />
                           Your browser does not support the video tag.

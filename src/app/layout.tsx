@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins, Great_Vibes } from "next/font/google";
+import { MusicProvider } from "@/contexts/MusicContext";
 import "./globals.css";
 
 // Romantic fonts
@@ -41,9 +42,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${poppins.variable} ${greatVibes.variable}`}>
+    <html lang="vi" className={`${playfair.variable} ${poppins.variable} ${greatVibes.variable}`}>
       <body className="font-body antialiased bg-romantic-warmWhite text-gray-800">
-        {children}
+        <MusicProvider>
+          {children}
+        </MusicProvider>
       </body>
     </html>
   );

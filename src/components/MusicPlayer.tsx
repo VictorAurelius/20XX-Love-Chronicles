@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useMusic } from '@/contexts/MusicContext';
 
 interface MusicPlayerProps {
   isBirthdayMode?: boolean;
@@ -14,13 +15,12 @@ interface Track {
 }
 
 export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { audioRef, isPlaying, setIsPlaying } = useMusic();
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [playlist, setPlaylist] = useState<Track[]>([]);
   const [volume, setVolume] = useState(0.5);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isShuffle, setIsShuffle] = useState(true);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playedTracks, setPlayedTracks] = useState<Set<string>>(new Set());
 
   // Load playlist based on mode
@@ -72,52 +72,61 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
 
   // Initialize audio element
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && audioRef) {
       audioRef.current = new Audio();
       audioRef.current.volume = volume;
 
       // Auto-play next track when current ends
-      audioRef.current.addEventListener('ended', handleNext);
+      const handleEnded = () => {
+        handleNext();
+      };
+
+      audioRef.current.addEventListener('ended', handleEnded);
 
       return () => {
         if (audioRef.current) {
-          audioRef.current.removeEventListener('ended', handleNext);
+          audioRef.current.removeEventListener('ended', handleEnded);
           audioRef.current.pause();
         }
       };
     }
-  }, []);
+  }, [audioRef]);
 
-  // Update audio source when track changes
+  // Update audio source when track changes and auto-play
   useEffect(() => {
-    if (audioRef.current && currentTrack) {
+    if (audioRef?.current && currentTrack) {
       audioRef.current.src = currentTrack.path;
-      if (isPlaying) {
-        audioRef.current.play().catch((error) => {
-          console.error('Error playing audio:', error);
-        });
-      }
+      // Auto-play when track loads
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error) => {
+        console.error('Error playing audio:', error);
+        // If auto-play fails (browser policy), user needs to click play
+        setIsPlaying(false);
+      });
     }
-  }, [currentTrack]);
+  }, [currentTrack, audioRef, setIsPlaying]);
 
   // Update volume
   useEffect(() => {
-    if (audioRef.current) {
+    if (audioRef?.current) {
       audioRef.current.volume = volume;
     }
-  }, [volume]);
+  }, [volume, audioRef]);
 
   const handlePlayPause = () => {
-    if (!audioRef.current || !currentTrack) return;
+    if (!audioRef?.current || !currentTrack) return;
 
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.play().catch((error) => {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error) => {
         console.error('Error playing audio:', error);
       });
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleNext = () => {
