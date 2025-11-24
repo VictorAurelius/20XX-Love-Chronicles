@@ -15,15 +15,20 @@ interface Track {
 }
 
 export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps) {
-  const { audioRef, isPlaying, setIsPlaying } = useMusic();
-  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
-  const [playlist, setPlaylist] = useState<Track[]>([]);
-  const [volume, setVolume] = useState(0.5);
+  const {
+    audioRef,
+    isPlaying,
+    setIsPlaying,
+    currentTrack,
+    setCurrentTrack,
+    volume,
+    setVolume,
+    playlist,
+    setPlaylist,
+  } = useMusic();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isShuffle, setIsShuffle] = useState(true);
-  const [playedTracks, setPlayedTracks] = useState<Set<string>>(new Set());
 
-  // Load playlist based on mode
+  // Load playlist based on mode (only once per mode)
   useEffect(() => {
     const loadPlaylist = () => {
       const tracks: Track[] = [];
@@ -58,94 +63,27 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
         );
       }
 
-      setPlaylist(tracks);
+      // Only update if playlist changed
+      const playlistChanged =
+        playlist.length === 0 ||
+        (isBirthdayMode && !playlist[0]?.id.includes('birthday')) ||
+        (!isBirthdayMode && playlist[0]?.id.includes('birthday'));
 
-      // Select random first track
-      if (tracks.length > 0) {
-        const randomIndex = Math.floor(Math.random() * tracks.length);
-        setCurrentTrack(tracks[randomIndex]);
+      if (playlistChanged) {
+        setPlaylist(tracks);
+
+        // Select first track if no track is playing
+        if (!currentTrack || playlistChanged) {
+          setCurrentTrack(tracks[0]);
+        }
       }
     };
 
     loadPlaylist();
-  }, [isBirthdayMode]);
-
-  // Initialize audio element
-  useEffect(() => {
-    if (typeof window !== 'undefined' && audioRef) {
-      audioRef.current = new Audio();
-      audioRef.current.volume = volume;
-      audioRef.current.loop = true; // Loop current track continuously
-
-      return () => {
-        if (audioRef.current) {
-          audioRef.current.pause();
-        }
-      };
-    }
-  }, [audioRef, volume]);
-
-  // Update audio source when track changes and auto-play
-  useEffect(() => {
-    if (audioRef?.current && currentTrack) {
-      audioRef.current.src = currentTrack.path;
-      audioRef.current.load();
-
-      // Try to auto-play
-      const playPromise = audioRef.current.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch((error) => {
-            console.log('Auto-play prevented by browser:', error.message);
-            // Auto-play was prevented, user will need to click play button
-            setIsPlaying(false);
-          });
-      }
-    }
-  }, [currentTrack, audioRef, setIsPlaying]);
-
-  // Update volume
-  useEffect(() => {
-    if (audioRef?.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume, audioRef]);
-
-  // Fallback: Try to play on any user interaction
-  useEffect(() => {
-    const handleInteraction = () => {
-      if (audioRef?.current && currentTrack && !isPlaying) {
-        audioRef.current.play().then(() => {
-          setIsPlaying(true);
-          // Remove listeners after successful play
-          document.removeEventListener('click', handleInteraction);
-          document.removeEventListener('touchstart', handleInteraction);
-          document.removeEventListener('keydown', handleInteraction);
-        }).catch(() => {
-          // Still blocked, keep listeners
-        });
-      }
-    };
-
-    if (currentTrack && !isPlaying) {
-      document.addEventListener('click', handleInteraction);
-      document.addEventListener('touchstart', handleInteraction);
-      document.addEventListener('keydown', handleInteraction);
-    }
-
-    return () => {
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
-    };
-  }, [audioRef, currentTrack, isPlaying, setIsPlaying]);
+  }, [isBirthdayMode, playlist, currentTrack, setPlaylist, setCurrentTrack]);
 
   const handlePlayPause = () => {
-    if (!audioRef?.current || !currentTrack) return;
+    if (!audioRef.current || !currentTrack) return;
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -295,26 +233,6 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
               </svg>
             </button>
 
-            {/* Shuffle */}
-            <button
-              onClick={() => setIsShuffle(!isShuffle)}
-              className={`p-2 rounded-full transition-colors ${
-                isShuffle ? 'bg-romantic-pink text-white' : 'hover:bg-white/50'
-              }`}
-              aria-label="Phát ngẫu nhiên"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M18 8h3m-3 5h3M4 4h3l3 3m0 0l3 3m-3-3l-3 3m0 0L4 13m0 3h3l3 3m0 0l3-3" />
-              </svg>
-            </button>
           </div>
 
           {/* Volume control */}

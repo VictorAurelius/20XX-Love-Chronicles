@@ -42,7 +42,7 @@ export default function EventDetail({ event }: EventDetailProps) {
   const [images, setImages] = useState<string[]>([]);
   const [videos, setVideos] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const { pauseMusic, resumeMusic } = useMusic();
+  const { pauseMusic } = useMusic();
   const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
@@ -97,13 +97,7 @@ export default function EventDetail({ event }: EventDetailProps) {
     }
   }, [pauseAllVideosExcept]);
 
-  // Resume music when leaving page (cleanup)
-  useEffect(() => {
-    return () => {
-      // When component unmounts, resume music
-      resumeMusic();
-    };
-  }, [resumeMusic]);
+  // Note: Music will continue playing when leaving page (no need to resume)
 
   return (
     <div className="min-h-screen bg-romantic-warmWhite">

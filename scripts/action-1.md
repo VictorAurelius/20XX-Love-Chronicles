@@ -74,6 +74,8 @@ khi chuyển video phải phát video mới chứ không phải là phát music
 chỉ khi chuyển trang khác mới phát music
 
 sửa lại
+
+tôi vẫn thấy 3 vấn đề này chưa được sửa:
 1. nhạc nền sẽ không đổi bài (phát liên tục) khi đổi trang hoặc bất kỳ các thao tác khác trừ phát video
 2. khi phát video phải tắt nhạc nền
 3. khi chuyển sang video khác phải phát luôn video đó
