@@ -13,6 +13,7 @@ interface TimelineEvent {
   date: string;
   title: string;
   description: string;
+  feeling?: string;
   folder: string;
   mediaCount: {
     images: number;
@@ -138,8 +139,27 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
         </motion.div>
       </div>
 
-      {/* Spacer for desktop layout */}
-      <div className="hidden md:block md:w-5/12" />
+      {/* Feeling/Reflection section - opposite side */}
+      {event.feeling && (
+        <motion.div
+          className={`hidden md:block md:w-5/12 ${isLeft ? 'md:text-left' : 'md:text-right'}`}
+          variants={cardVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
+          <div className="p-6 bg-gradient-to-br from-romantic-lavender/20 to-romantic-pink/10 rounded-2xl border-2 border-romantic-lavender/30">
+            <div className="flex items-start gap-3 mb-3">
+              <span className="text-3xl">💭</span>
+              <h4 className="text-lg font-heading font-bold text-romantic-deepRose">
+                Cảm nhận
+              </h4>
+            </div>
+            <p className="text-gray-700 leading-relaxed italic font-accent">
+              &ldquo;{event.feeling}&rdquo;
+            </p>
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }

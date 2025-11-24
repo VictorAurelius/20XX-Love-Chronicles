@@ -12,6 +12,7 @@ import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
 import { useMusic } from '@/contexts/MusicContext';
 import BirthdayCountdown from '@/components/BirthdayCountdown';
+import BirthdayLetter from '@/components/BirthdayLetter';
 import coupleInfo from '@/data/couple-info.json';
 
 // Import Swiper styles
@@ -278,6 +279,15 @@ export default function EventDetail({ event }: EventDetailProps) {
               }
               isBoy={isBoyBirthday}
             />
+          </div>
+        </section>
+      )}
+
+      {/* Birthday Letter - Only show on girlfriend birthday */}
+      {event.id === 'girlfriend-birthday' && (
+        <section className="py-16 bg-gradient-to-br from-romantic-lavender/20 to-romantic-pink/10">
+          <div className="container-custom">
+            <BirthdayLetter />
           </div>
         </section>
       )}

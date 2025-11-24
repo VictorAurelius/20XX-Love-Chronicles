@@ -8,6 +8,7 @@ import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
 import ParticleBackground from '@/components/animations/ParticleBackground';
 import Sparkles from '@/components/animations/Sparkles';
+import FloralDecoration from '@/components/animations/FloralDecoration';
 
 interface Event {
   id: string;
@@ -82,6 +83,7 @@ export default function GalleryPage() {
       {/* Background animations */}
       <ParticleBackground />
       <Sparkles />
+      <FloralDecoration />
 
       {/* Hero Section */}
       <motion.div

@@ -3,6 +3,10 @@ import Header from '@/components/Header';
 import EventDetail from '@/components/EventDetail';
 import MusicPlayer from '@/components/MusicPlayer';
 import timelineData from '@/data/timeline-data.json';
+import ParticleBackground from '@/components/animations/ParticleBackground';
+import Sparkles from '@/components/animations/Sparkles';
+import FloatingHearts from '@/components/animations/FloatingHearts';
+import FloralDecoration from '@/components/animations/FloralDecoration';
 
 interface PageProps {
   params: {
@@ -31,6 +35,12 @@ export default function EventPage({ params }: PageProps) {
 
   return (
     <>
+      {/* Background animations */}
+      <ParticleBackground />
+      <Sparkles />
+      {isBirthdayEvent && <FloatingHearts />}
+      <FloralDecoration />
+
       <Header />
       <main className="pt-20">
         <EventDetail event={event} />

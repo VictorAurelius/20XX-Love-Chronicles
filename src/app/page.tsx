@@ -6,6 +6,7 @@ import FloatingHearts from '@/components/animations/FloatingHearts';
 import Sparkles from '@/components/animations/Sparkles';
 import ParticleBackground from '@/components/animations/ParticleBackground';
 import AnimatedGradient from '@/components/animations/AnimatedGradient';
+import FloralDecoration from '@/components/animations/FloralDecoration';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <ParticleBackground />
       <Sparkles />
       <FloatingHearts />
+      <FloralDecoration />
 
       <Header />
       <main>

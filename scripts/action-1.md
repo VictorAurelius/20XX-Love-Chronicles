@@ -109,3 +109,9 @@ cover.jpg:1  Failed to load resource: the server responded with a status of 404 
 tôi muốn nhiều animation trang trí hơn, hãy tạo req-2 để trang trí đẹp mắt hơn cho web
 
 ngoài ra hãy đề xuất thêm 1 số ý tưởng phát triển nữa, những vẫn phải là web tĩnh
+
+1. ngoài home ra, các trang khác cũng cần cập nhật background mới
+2. ở home, list event => thêm các dòng mô tả và cảm nhận ở khoảng trống đối diện của mỗi event
+3. ở birthday của bạn gái: thêm box mở thư chúc của bạn trai, thiết kế thư chúc thật đẹp
+4. ở viền trái phải của web có thể trang trí thêm hoa, ..
+

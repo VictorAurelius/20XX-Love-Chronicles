@@ -1,13 +1,13 @@
 {
   "couple": {
     "boy": {
-      "name": "Anh Yêu",
+      "name": "Văn Kiệt",
       "avatar": "/data/avatars/avatar-boy.jpg",
       "nickname": "Nguyễn Văn Kiệt",
       "birthday": "2004-09-30"
     },
     "girl": {
-      "name": "Em Yêu",
+      "name": "Thùy Dương",
       "avatar": "/data/avatars/avatar-girl.jpg",
       "nickname": "Nguyễn Thùy Dương",
       "birthday": "2004-12-10"
