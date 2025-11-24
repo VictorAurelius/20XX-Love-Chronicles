@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getDataPath } from '@/lib/asset-utils';
 import { useMusic } from '@/contexts/MusicContext';
 
 interface MusicPlayerProps {
@@ -39,12 +40,12 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
           {
             id: 'birthday-01',
             title: 'Happy Birthday (Piano)',
-            path: '/data/music/birthday/01-happy-birthday-english-piano.mp3',
+            path: getDataPath('music/birthday/01-happy-birthday-english-piano.mp3'),
           },
           {
             id: 'birthday-02',
             title: 'Happy Birthday',
-            path: '/data/music/birthday/02-happy-birthday-english.mp3',
+            path: getDataPath('music/birthday/02-happy-birthday-english.mp3'),
           }
         );
       } else {
@@ -53,12 +54,12 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
           {
             id: 'normal-01',
             title: 'Lễ Đường',
-            path: '/data/music/01-le-duong.mp3',
+            path: getDataPath('music/01-le-duong.mp3'),
           },
           {
             id: 'normal-02',
             title: 'Từng Ngày Yêu Em',
-            path: '/data/music/02-tung-ngay-yeu-em.mp3',
+            path: getDataPath('music/02-tung-ngay-yeu-em.mp3'),
           }
         );
       }

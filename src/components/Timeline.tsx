@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatDate } from '@/lib/date-utils';
+import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
 
 interface TimelineEvent {
@@ -47,8 +48,8 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
   };
 
   const coverImage = event.hasCover
-    ? `/data/timeline/${event.folder}/cover.jpg`
-    : '/placeholder-event.jpg';
+    ? getDataPath(`timeline/${event.folder}/cover.jpg`)
+    : getDataPath('placeholder-event.jpg');
 
   return (
     <motion.div

@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+const repoName = '/20XX-Love-Chronicles';
+
 const nextConfig = {
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/20XX-Love-Chronicles' : '',
+  basePath: isProd ? repoName : '',
+  assetPrefix: isProd ? repoName : '',
   images: {
     unoptimized: true, // Required for static export
   },

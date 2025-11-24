@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
 
 interface Event {
@@ -37,7 +38,7 @@ export default function GalleryPage() {
     (timelineData.timeline as Event[]).forEach((event) => {
       event.mediaFiles.images.forEach((filename, index) => {
         images.push({
-          src: `/data/timeline/${event.folder}/${filename}`,
+          src: getDataPath(`timeline/${event.folder}/${filename}`),
           alt: `${event.title} - Ảnh ${index + 1}`,
           eventId: event.id,
           eventTitle: event.title,

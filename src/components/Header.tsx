@@ -26,9 +26,8 @@ export default function Header() {
 
   const navLinks = [
     { href: '/', label: 'Trang Chủ' },
-    { href: '/timeline', label: 'Hành Trình' },
+    { href: '/#timeline', label: 'Hành Trình' },
     { href: '/gallery', label: 'Thư Viện Ảnh' },
-    { href: '/about', label: 'Về Chúng Mình' },
   ];
 
   return (

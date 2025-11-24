@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { formatDate } from '@/lib/date-utils';
+import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
 import { useMusic } from '@/contexts/MusicContext';
 import BirthdayCountdown from '@/components/BirthdayCountdown';
@@ -56,13 +57,13 @@ export default function EventDetail({ event }: EventDetailProps) {
   useEffect(() => {
     // Generate image URLs from actual file list
     const imageUrls = event.mediaFiles.images.map(
-      (filename) => `/data/timeline/${event.folder}/${filename}`
+      (filename) => getDataPath(`timeline/${event.folder}/${filename}`)
     );
     setImages(imageUrls);
 
     // Generate video URLs from actual file list
     const videoUrls = event.mediaFiles.videos.map(
-      (filename) => `/data/timeline/${event.folder}/${filename}`
+      (filename) => getDataPath(`timeline/${event.folder}/${filename}`)
     );
     setVideos(videoUrls);
   }, [event]);
