@@ -178,7 +178,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
                     "
                   </span>
 
-                  <p className="text-xl md:text-2xl leading-relaxed text-gray-700 font-light relative z-10 px-4">
+                  <p className="text-xl md:text-2xl leading-relaxed text-gray-800 font-heading font-normal relative z-10 px-4">
                     {event.feeling}
                   </p>
                 </blockquote>
