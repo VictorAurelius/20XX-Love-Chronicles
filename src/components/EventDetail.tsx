@@ -10,6 +10,8 @@ import type { Swiper as SwiperType } from 'swiper';
 import { formatDate } from '@/lib/date-utils';
 import timelineData from '@/data/timeline-data.json';
 import { useMusic } from '@/contexts/MusicContext';
+import BirthdayCountdown from '@/components/BirthdayCountdown';
+import coupleInfo from '@/data/couple-info.json';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -67,6 +69,9 @@ export default function EventDetail({ event }: EventDetailProps) {
   }, [event]);
 
   const isDailyMemories = event.id === 'daily-memories';
+  const isBirthdayEvent =
+    event.id === 'boyfriend-birthday' || event.id === 'girlfriend-birthday';
+  const isBoyBirthday = event.id === 'boyfriend-birthday';
 
   // Handle video play - pause music
   const handleVideoPlay = useCallback(() => {
@@ -103,11 +108,106 @@ export default function EventDetail({ event }: EventDetailProps) {
     <div className="min-h-screen bg-romantic-warmWhite">
       {/* Hero section with event info */}
       <motion.div
-        className="relative py-20 bg-gradient-romantic-3"
+        className={`relative py-20 ${
+          isBirthdayEvent
+            ? 'bg-gradient-to-br from-romantic-pink via-romantic-lavender to-romantic-peach'
+            : 'bg-gradient-romantic-3'
+        }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
+        {/* Birthday Special Effects */}
+        {isBirthdayEvent && (
+          <>
+            {/* Floating Balloons */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={`balloon-${i}`}
+                  className="absolute text-6xl"
+                  style={{
+                    left: `${10 + i * 12}%`,
+                    bottom: '-10%',
+                  }}
+                  animate={{
+                    y: [0, -1000],
+                    x: [0, Math.sin(i) * 50],
+                    rotate: [0, 10, -10, 0],
+                  }}
+                  transition={{
+                    duration: 15 + i * 2,
+                    repeat: Infinity,
+                    delay: i * 1.5,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  {['🎈', '🎉', '🎊', '🎁'][i % 4]}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Sparkles */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(20)].map((_, i) => (
+                <motion.div
+                  key={`sparkle-${i}`}
+                  className="absolute text-yellow-400"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    fontSize: `${Math.random() * 20 + 10}px`,
+                  }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0, 1.5, 0],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: Math.random() * 3 + 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 3,
+                  }}
+                >
+                  ✨
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Birthday Cake Corner */}
+            <motion.div
+              className="absolute top-8 right-8 text-7xl"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              🎂
+            </motion.div>
+
+            {/* Gift Box Corner */}
+            <motion.div
+              className="absolute bottom-8 left-8 text-6xl"
+              animate={{
+                y: [0, -10, 0],
+                rotate: [0, -5, 5, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              🎁
+            </motion.div>
+          </>
+        )}
+
         <div className="container-custom">
           {/* Back button */}
           <Link
@@ -161,6 +261,27 @@ export default function EventDetail({ event }: EventDetailProps) {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Birthday Countdown - Only show on birthday events */}
+      {isBirthdayEvent && (
+        <section className="py-12 bg-romantic-warmWhite">
+          <div className="container-custom max-w-2xl">
+            <BirthdayCountdown
+              birthdayDate={
+                isBoyBirthday
+                  ? coupleInfo.couple.boy.birthday.slice(5) // Get MM-DD
+                  : coupleInfo.couple.girl.birthday.slice(5)
+              }
+              personName={
+                isBoyBirthday
+                  ? coupleInfo.couple.boy.name
+                  : coupleInfo.couple.girl.name
+              }
+              isBoy={isBoyBirthday}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Photo Gallery */}
       {images.length > 0 && (
