@@ -3,14 +3,14 @@
     "boy": {
       "name": "Anh Yêu",
       "avatar": "/data/avatars/avatar-boy.jpg",
-      "nickname": "My Love",
-      "birthday": "1998-09-30"
+      "nickname": "Nguyễn Văn Kiệt",
+      "birthday": "2004-09-30"
     },
     "girl": {
       "name": "Em Yêu",
       "avatar": "/data/avatars/avatar-girl.jpg",
-      "nickname": "My Baby",
-      "birthday": "1999-12-10"
+      "nickname": "Nguyễn Thùy Dương",
+      "birthday": "2004-12-10"
     },
     "relationship": {
       "startDate": "2025-01-20",

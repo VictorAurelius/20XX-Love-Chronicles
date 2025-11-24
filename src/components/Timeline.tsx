@@ -1,0 +1,201 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
+import Link from 'next/link';
+import { formatDate } from '@/lib/date-utils';
+import timelineData from '@/data/timeline-data.json';
+
+interface TimelineEvent {
+  id: string;
+  date: string;
+  title: string;
+  description: string;
+  folder: string;
+  mediaCount: {
+    images: number;
+    videos: number;
+    total: number;
+  };
+  hasCover: boolean;
+}
+
+function TimelineCard({ event, index }: { event: TimelineEvent; index: number }) {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
+  const isLeft = index % 2 === 0;
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      x: isLeft ? -50 : 50,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
+  };
+
+  const coverImage = event.hasCover
+    ? `/data/timeline/${event.folder}/cover.jpg`
+    : '/placeholder-event.jpg';
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={cardVariants}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+      className={`flex items-center gap-8 mb-16 md:mb-24 ${
+        isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+      } flex-col`}
+    >
+      {/* Timeline dot and line */}
+      <div className="hidden md:flex flex-col items-center absolute left-1/2 transform -translate-x-1/2">
+        <motion.div
+          className="w-6 h-6 rounded-full bg-gradient-romantic-1 shadow-romantic z-10"
+          animate={inView ? { scale: [1, 1.2, 1] } : {}}
+          transition={{ duration: 0.6 }}
+        />
+      </div>
+
+      {/* Card content */}
+      <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
+        <motion.div
+          className="romantic-card p-6 hover:shadow-romantic-lg transition-all duration-300"
+          whileHover={{ scale: 1.02 }}
+        >
+          {/* Cover image */}
+          <div className="relative w-full h-64 rounded-xl overflow-hidden mb-4 bg-romantic-softGray">
+            <Image
+              src={coverImage}
+              alt={event.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+            {/* Media count badge */}
+            <div className="absolute top-4 right-4 flex gap-2">
+              {event.mediaCount.images > 0 && (
+                <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700">
+                  📸 {event.mediaCount.images}
+                </span>
+              )}
+              {event.mediaCount.videos > 0 && (
+                <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700">
+                  🎥 {event.mediaCount.videos}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Date */}
+          <p className="text-romantic-rose font-medium mb-2">
+            {formatDate(event.date, 'dd MMMM yyyy')}
+          </p>
+
+          {/* Title */}
+          <h3 className="text-2xl md:text-3xl font-heading font-bold text-gray-800 mb-3">
+            {event.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-gray-600 mb-6 line-clamp-3">{event.description}</p>
+
+          {/* View details button */}
+          <Link
+            href={`/event/${event.id}`}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-romantic-1 text-white font-medium hover:shadow-romantic-lg transition-all duration-300 hover:scale-105"
+          >
+            View Details
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* Spacer for desktop layout */}
+      <div className="hidden md:block md:w-5/12" />
+    </motion.div>
+  );
+}
+
+export default function Timeline() {
+  const events = timelineData.timeline as TimelineEvent[];
+
+  return (
+    <section className="relative py-20">
+      {/* Vertical line - desktop only */}
+      <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-romantic-pink via-romantic-lavender to-romantic-peach opacity-30" />
+
+      <div className="container-custom relative">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-5xl md:text-6xl font-heading font-bold text-gradient-romantic mb-4">
+            Our Timeline
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Every moment with you is a memory worth keeping 💕
+          </p>
+          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
+            <span>{events.length} Events</span>
+            <span>•</span>
+            <span>{events.reduce((sum, e) => sum + e.mediaCount.images, 0)} Photos</span>
+            <span>•</span>
+            <span>{events.reduce((sum, e) => sum + e.mediaCount.videos, 0)} Videos</span>
+          </div>
+        </motion.div>
+
+        {/* Timeline events */}
+        <div className="relative">
+          {events.map((event, index) => (
+            <TimelineCard key={event.id} event={event} index={index} />
+          ))}
+        </div>
+
+        {/* End of timeline decoration */}
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-romantic-1 text-white text-3xl shadow-romantic">
+            💕
+          </div>
+          <p className="mt-4 text-romantic-rose font-accent text-2xl">
+            To be continued...
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

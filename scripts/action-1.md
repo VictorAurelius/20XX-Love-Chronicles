@@ -52,3 +52,5 @@ tôi muốn trong folder music có 1 folder con cho nhạc birthday và đối v
 hãy sửa Kỉ Niệm Trước Sinh Nhật thành kỉ niệm đời thường và xử lý đặc biệt cho event này, vì sẽ có nhiều ảnh và video hơn hẳn các event khác. Giao diện cho video cũng phải xử lý tốt để xem mượt mà
 
 bắt đầu thực hiện req-1 nào
+
+sửa lại summary và readme sang tiếng việt
