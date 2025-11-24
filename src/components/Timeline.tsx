@@ -111,12 +111,9 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
           </p>
 
           {/* Title */}
-          <h3 className="text-2xl md:text-3xl font-heading font-bold text-gray-800 mb-3">
+          <h3 className="text-2xl md:text-3xl font-heading font-bold text-gray-800 mb-6">
             {event.title}
           </h3>
-
-          {/* Description */}
-          <p className="text-gray-600 mb-6 line-clamp-3">{event.description}</p>
 
           {/* View details button */}
           <Link
@@ -147,11 +144,55 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          <div className="h-full flex items-center p-8 bg-gradient-to-br from-romantic-lavender/20 to-romantic-pink/10 rounded-2xl border-2 border-romantic-lavender/30">
-            <p className="text-lg md:text-xl leading-relaxed italic font-accent text-gray-800">
-              &ldquo;{event.feeling}&rdquo;
-            </p>
-          </div>
+          <motion.div
+            className="romantic-card p-8 hover-lift hover-shine relative overflow-hidden"
+            whileHover={{ scale: 1.02 }}
+          >
+            {/* Subtle gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-romantic-lavender/10 via-transparent to-romantic-pink/10" />
+
+            {/* Content area */}
+            <div className="relative z-10 h-full flex flex-col">
+              {/* Small decorative icon at top */}
+              <div className="mb-6">
+                <motion.span
+                  className="text-3xl opacity-60"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  💭
+                </motion.span>
+              </div>
+
+              {/* Main feeling text - takes up most space */}
+              <div className="flex-1 flex items-center">
+                <blockquote className={`relative ${isLeft ? 'text-left' : 'text-right'}`}>
+                  {/* Subtle decorative quote mark */}
+                  <span className="absolute -top-4 -left-2 text-6xl text-romantic-rose/20 font-serif leading-none">
+                    "
+                  </span>
+
+                  <p className="text-xl md:text-2xl leading-relaxed text-gray-700 font-light relative z-10 px-4">
+                    {event.feeling}
+                  </p>
+                </blockquote>
+              </div>
+
+              {/* Small decorative element at bottom */}
+              <div className={`mt-6 flex ${isLeft ? 'justify-start' : 'justify-end'}`}>
+                <div className="flex items-center gap-1 opacity-40">
+                  <span className="text-sm">💕</span>
+                  <div className="w-16 h-px bg-gradient-to-r from-romantic-pink to-transparent" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </motion.div>

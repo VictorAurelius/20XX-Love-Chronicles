@@ -15,7 +15,7 @@ export default function BirthdayLetter() {
       "Anh hứa sẽ luôn ở bên em, yêu thương em, và làm em hạnh phúc mỗi ngày. Dù cuộc sống có khó khăn thế nào, anh và em sẽ cùng nhau vượt qua.",
       "Chúc em sinh nhật thật vui vẻ và ý nghĩa. Anh yêu em rất nhiều! 💖"
     ],
-    signature: "Người yêu em nhất❤️ /n Văn Kiệt"
+    signature: "Người yêu em nhất❤️\nVăn Kiệt"
   };
 
   return (

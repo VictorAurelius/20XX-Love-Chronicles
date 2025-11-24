@@ -125,3 +125,13 @@ ngoài ra hãy đề xuất thêm 1 số ý tưởng phát triển nữa, nhữn
 2. font chữ thanh panel (Home, gallery,...) vẫn chưa đổi
 3. bỏ tiêu đề "Cảm Nhận" đi, chỉnh font chữ to dễ đọc hơn, chỉnh cả tab cảm nhận to bằng tab event để cân đối
 4. font của panel music cũng cần chỉnh lại to hơn, font như trước
+
+
+1. box của cảm nhận vẫn chưa bằng box của event, size vẫn hơn nhỏ và tôi không thích font chữ này
+2. bỏ tất cả text mô tả của event vì đã có cảm nhận rồi
+3. signature: "Người yêu em nhất❤️ /n Văn Kiệt" +. giúp tôi sửa lại để xuống dòng được
+
+box cảm nhận quá xấu và cả trình bày và vị trí, hãy thiết kế lại để cân đối với box event
+
+bạn có thể đọc scripts/op-1.png để xem hết quả thực tế
+quá xấu, icon cảm nhận to hơn cả chữ, không bằng nhau và text cũng không đẹp, hãy trình bày đẹp hơn, tinh tế hơn
