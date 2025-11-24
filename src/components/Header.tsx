@@ -68,7 +68,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 hover:text-romantic-deepRose font-medium transition-colors duration-200 relative group"
+                className="text-lg font-accent font-semibold text-gray-800 hover:text-romantic-deepRose transition-colors duration-200 relative group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-romantic-deepRose transition-all duration-300 group-hover:w-full" />
@@ -118,7 +118,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="block px-4 py-2 text-center text-gray-700 hover:bg-romantic-softGray rounded-lg transition-colors"
+                className="block px-4 py-2 text-center text-lg font-accent font-semibold text-gray-800 hover:bg-romantic-softGray rounded-lg transition-colors"
               >
                 {link.label}
               </Link>

@@ -147,14 +147,8 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          <div className="p-6 bg-gradient-to-br from-romantic-lavender/20 to-romantic-pink/10 rounded-2xl border-2 border-romantic-lavender/30">
-            <div className="flex items-start gap-3 mb-3">
-              <span className="text-3xl">💭</span>
-              <h4 className="text-lg font-heading font-bold text-romantic-deepRose">
-                Cảm nhận
-              </h4>
-            </div>
-            <p className="text-gray-700 leading-relaxed italic font-accent">
+          <div className="h-full flex items-center p-8 bg-gradient-to-br from-romantic-lavender/20 to-romantic-pink/10 rounded-2xl border-2 border-romantic-lavender/30">
+            <p className="text-lg md:text-xl leading-relaxed italic font-accent text-gray-800">
               &ldquo;{event.feeling}&rdquo;
             </p>
           </div>

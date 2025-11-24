@@ -138,7 +138,7 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
             transition={{ duration: 0.3 }}
           >
             <div className="max-h-64 overflow-y-auto p-4">
-              <h3 className="text-sm font-semibold text-gray-800 mb-3">
+              <h3 className="text-base font-semibold text-gray-800 mb-3">
                 {isBirthdayMode ? '🎂 Nhạc Sinh Nhật' : '🎵 Danh Sách Phát'}
               </h3>
               <div className="space-y-2">
@@ -155,7 +155,7 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
                         : 'hover:bg-romantic-softGray text-gray-700'
                     }`}
                   >
-                    <p className="text-sm font-medium">{track.title}</p>
+                    <p className="text-base font-medium">{track.title}</p>
                   </button>
                 ))}
               </div>
@@ -169,10 +169,10 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
         <div className="flex items-center justify-between gap-4">
           {/* Track info */}
           <div className="flex-1 min-w-0">
-            <p className="text-base font-accent font-semibold text-gray-800 truncate">
+            <p className="text-lg font-medium text-gray-800 truncate">
               {currentTrack.title}
             </p>
-            <p className="text-sm font-accent text-romantic-rose">
+            <p className="text-base text-gray-600">
               {isBirthdayMode ? 'Chế độ sinh nhật 🎂' : 'Nhạc lãng mạn 💕'}
             </p>
           </div>

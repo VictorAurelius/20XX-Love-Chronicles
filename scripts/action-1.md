@@ -120,3 +120,8 @@ ngoài ra hãy đề xuất thêm 1 số ý tưởng phát triển nữa, nhữn
 3. thanh panel font chữ chưa đẹp
 4. khi chạy lại timeline thì bị tiếng anh trở lại
 5. chưa có thêm: 2. ở home, list event => thêm các dòng mô tả và cảm nhận ở khoảng trống đối diện của mỗi event
+
+1. các Hero text bị mất 1 phần ở dưới
+2. font chữ thanh panel (Home, gallery,...) vẫn chưa đổi
+3. bỏ tiêu đề "Cảm Nhận" đi, chỉnh font chữ to dễ đọc hơn, chỉnh cả tab cảm nhận to bằng tab event để cân đối
+4. font của panel music cũng cần chỉnh lại to hơn, font như trước
