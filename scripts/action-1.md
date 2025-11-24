@@ -54,3 +54,11 @@ hãy sửa Kỉ Niệm Trước Sinh Nhật thành kỉ niệm đời thường 
 bắt đầu thực hiện req-1 nào
 
 sửa lại summary và readme sang tiếng việt
+
+đếm số ngày yêu đang để chữ trắng, trùng màu nền
+
+cần chỉnh sửa:
+1. hãy dùng tất cả đều là tiếng việt 1 cách hợp lý, hướng đến tình yêu => timeline: hành trình của bọn mình, ...
+2. khoảng cách các timeline đang khá xa, hiển thị chưa hết ảnh cover
+
+vẫn còn tiếng việt: Before Confession, ngày, ...

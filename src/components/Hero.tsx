@@ -127,7 +127,7 @@ export default function Hero() {
           variants={itemVariants}
           className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-12"
         >
-          {coupleInfo.couple.relationship.description || "A beautiful timeline of our journey together, filled with love, laughter, and unforgettable memories."}
+          {coupleInfo.couple.relationship.description || "Hành trình tình yêu của chúng mình, đầy ắp những khoảnh khắc ngọt ngào và kỷ niệm đáng nhớ."}
         </motion.p>
 
         {/* CTA Button */}
@@ -138,7 +138,7 @@ export default function Hero() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Explore Our Story 💖
+            Khám Phá Câu Chuyện Tình Yêu 💖
           </motion.a>
         </motion.div>
 
@@ -155,7 +155,7 @@ export default function Hero() {
           }}
         >
           <div className="flex flex-col items-center text-romantic-rose">
-            <span className="text-sm mb-2">Scroll Down</span>
+            <span className="text-sm mb-2">Cuộn Xuống</span>
             <svg
               className="w-6 h-6"
               fill="none"

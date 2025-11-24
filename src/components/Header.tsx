@@ -25,10 +25,10 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/timeline', label: 'Timeline' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/about', label: 'About Us' },
+    { href: '/', label: 'Trang Chủ' },
+    { href: '/timeline', label: 'Hành Trình' },
+    { href: '/gallery', label: 'Thư Viện Ảnh' },
+    { href: '/about', label: 'Về Chúng Mình' },
   ];
 
   return (
@@ -55,11 +55,11 @@ export default function Header() {
           </Link>
 
           {/* Love Counter - Desktop */}
-          <div className="hidden md:flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-romantic-1 text-white shadow-romantic">
+          <div className="hidden md:flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-romantic-1 shadow-romantic">
             <span className="text-xl">💖</span>
             <div className="text-center">
-              <p className="text-2xl font-bold">{loveDays}</p>
-              <p className="text-xs font-medium">days together</p>
+              <p className="text-2xl font-bold text-romantic-deepRose">{loveDays}</p>
+              <p className="text-xs font-medium text-gray-700">ngày bên nhau</p>
             </div>
           </div>
 
@@ -105,11 +105,11 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 py-4 space-y-4 animate-fade-in">
             {/* Love Counter - Mobile */}
-            <div className="flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-gradient-romantic-1 text-white shadow-romantic">
+            <div className="flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-gradient-romantic-1 shadow-romantic">
               <span className="text-xl">💖</span>
               <div className="text-center">
-                <p className="text-2xl font-bold">{loveDays}</p>
-                <p className="text-xs font-medium">days together</p>
+                <p className="text-2xl font-bold text-romantic-deepRose">{loveDays}</p>
+                <p className="text-xs font-medium text-gray-700">ngày bên nhau</p>
               </div>
             </div>
 

@@ -56,7 +56,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
       variants={cardVariants}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
-      className={`flex items-center gap-8 mb-16 md:mb-24 ${
+      className={`flex items-center gap-8 mb-8 md:mb-12 ${
         isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
       } flex-col`}
     >
@@ -76,7 +76,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
           whileHover={{ scale: 1.02 }}
         >
           {/* Cover image */}
-          <div className="relative w-full h-64 rounded-xl overflow-hidden mb-4 bg-romantic-softGray">
+          <div className="relative w-full h-72 md:h-80 rounded-xl overflow-hidden mb-4 bg-romantic-softGray">
             <Image
               src={coverImage}
               alt={event.title}
@@ -117,9 +117,9 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
           {/* View details button */}
           <Link
             href={`/event/${event.id}`}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-romantic-1 text-white font-medium hover:shadow-romantic-lg transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-romantic-1 text-romantic-deepRose font-medium hover:shadow-romantic-lg transition-all duration-300 hover:scale-105"
           >
-            View Details
+            Xem Chi Tiết
             <svg
               className="w-5 h-5"
               fill="none"
@@ -159,17 +159,17 @@ export default function Timeline() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-5xl md:text-6xl font-heading font-bold text-gradient-romantic mb-4">
-            Our Timeline
+            Hành Trình Của Bọn Mình
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Every moment with you is a memory worth keeping 💕
+            Mỗi khoảnh khắc bên em đều là kỷ niệm đáng trân trọng 💕
           </p>
           <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
-            <span>{events.length} Events</span>
+            <span>{events.length} Kỷ Niệm</span>
             <span>•</span>
-            <span>{events.reduce((sum, e) => sum + e.mediaCount.images, 0)} Photos</span>
+            <span>{events.reduce((sum, e) => sum + e.mediaCount.images, 0)} Ảnh</span>
             <span>•</span>
-            <span>{events.reduce((sum, e) => sum + e.mediaCount.videos, 0)} Videos</span>
+            <span>{events.reduce((sum, e) => sum + e.mediaCount.videos, 0)} Video</span>
           </div>
         </motion.div>
 
@@ -192,7 +192,7 @@ export default function Timeline() {
             💕
           </div>
           <p className="mt-4 text-romantic-rose font-accent text-2xl">
-            To be continued...
+            Câu chuyện tình yêu vẫn tiếp diễn...
           </p>
         </motion.div>
       </div>

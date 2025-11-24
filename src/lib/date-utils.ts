@@ -1,4 +1,5 @@
 import { differenceInDays, format, parseISO } from 'date-fns';
+import { vi } from 'date-fns/locale';
 
 /**
  * Calculate the number of days between two dates
@@ -14,7 +15,7 @@ export function getDaysSince(startDate: string): number {
  */
 export function formatDate(dateString: string, formatString: string = 'dd/MM/yyyy'): string {
   const date = parseISO(dateString);
-  return format(date, formatString);
+  return format(date, formatString, { locale: vi });
 }
 
 /**
@@ -50,7 +51,7 @@ export function getDaysUntil(eventDate: string): number {
  * Format days count to display string
  */
 export function formatDaysCount(days: number): string {
-  if (days === 0) return 'Today!';
-  if (days === 1) return '1 day';
-  return `${days} days`;
+  if (days === 0) return 'Hôm nay!';
+  if (days === 1) return '1 ngày';
+  return `${days} ngày`;
 }

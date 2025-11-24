@@ -89,7 +89,7 @@ export default function EventDetail({ event }: EventDetailProps) {
             >
               <path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
-            Back to Timeline
+            Quay Lại Hành Trình
           </Link>
 
           {/* Event info */}
@@ -112,13 +112,13 @@ export default function EventDetail({ event }: EventDetailProps) {
               {event.mediaCount.images > 0 && (
                 <span className="flex items-center gap-2">
                   <span className="text-2xl">📸</span>
-                  {event.mediaCount.images} Photos
+                  {event.mediaCount.images} Ảnh
                 </span>
               )}
               {event.mediaCount.videos > 0 && (
                 <span className="flex items-center gap-2">
                   <span className="text-2xl">🎥</span>
-                  {event.mediaCount.videos} Videos
+                  {event.mediaCount.videos} Video
                 </span>
               )}
             </div>
@@ -131,7 +131,7 @@ export default function EventDetail({ event }: EventDetailProps) {
         <section className="py-16">
           <div className="container-custom">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-8 text-center">
-              Photos 📸
+              Ảnh 📸
             </h2>
 
             {isDailyMemories ? (
@@ -199,7 +199,7 @@ export default function EventDetail({ event }: EventDetailProps) {
         <section className="py-16 bg-romantic-softGray">
           <div className="container-custom">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-8 text-center">
-              Videos 🎥
+              Video 🎥
             </h2>
 
             <div className="max-w-2xl mx-auto">
@@ -255,7 +255,7 @@ export default function EventDetail({ event }: EventDetailProps) {
                   <path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
                 <div className="text-left">
-                  <p className="text-xs text-gray-500">Previous</p>
+                  <p className="text-xs text-gray-500">Trước</p>
                   <p className="font-semibold text-gray-800">{prevEvent.title}</p>
                 </div>
               </Link>
@@ -269,7 +269,7 @@ export default function EventDetail({ event }: EventDetailProps) {
                 className="flex items-center gap-3 p-4 rounded-xl bg-white shadow-romantic hover:shadow-romantic-lg transition-all duration-300 hover:scale-105 group"
               >
                 <div className="text-right">
-                  <p className="text-xs text-gray-500">Next</p>
+                  <p className="text-xs text-gray-500">Tiếp</p>
                   <p className="font-semibold text-gray-800">{nextEvent.title}</p>
                 </div>
                 <svg
