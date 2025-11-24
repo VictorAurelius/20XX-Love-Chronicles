@@ -67,3 +67,13 @@ có 1 số bug khi display video và music:
 1. khi chuyển sang video khác thì cần dừng video cũ và phát luôn video mới
 2. khi lướt xuống phần video sẽ tự tắt nhạc nền vào phát video luôn
 3. khi mới vào home hoặc chuyển trang thì phải tự động phát nhạc
+
+hãy sửa tên bài cho đúng "Lễ Đường"
+khi mới vào trang home phải phát music luôn
+khi chuyển video phải phát video mới chứ không phải là phát music
+chỉ khi chuyển trang khác mới phát music
+
+sửa lại
+1. nhạc nền sẽ không đổi bài (phát liên tục) khi đổi trang hoặc bất kỳ các thao tác khác trừ phát video
+2. khi phát video phải tắt nhạc nền
+3. khi chuyển sang video khác phải phát luôn video đó

@@ -47,7 +47,7 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
         tracks.push(
           {
             id: 'normal-01',
-            title: 'Lệ Dương',
+            title: 'Lễ Đường',
             path: '/data/music/01-le-duong.mp3',
           },
           {
@@ -75,35 +75,36 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
     if (typeof window !== 'undefined' && audioRef) {
       audioRef.current = new Audio();
       audioRef.current.volume = volume;
-
-      // Auto-play next track when current ends
-      const handleEnded = () => {
-        handleNext();
-      };
-
-      audioRef.current.addEventListener('ended', handleEnded);
+      audioRef.current.loop = true; // Loop current track continuously
 
       return () => {
         if (audioRef.current) {
-          audioRef.current.removeEventListener('ended', handleEnded);
           audioRef.current.pause();
         }
       };
     }
-  }, [audioRef]);
+  }, [audioRef, volume]);
 
   // Update audio source when track changes and auto-play
   useEffect(() => {
     if (audioRef?.current && currentTrack) {
       audioRef.current.src = currentTrack.path;
-      // Auto-play when track loads
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.error('Error playing audio:', error);
-        // If auto-play fails (browser policy), user needs to click play
-        setIsPlaying(false);
-      });
+      audioRef.current.load();
+
+      // Try to auto-play
+      const playPromise = audioRef.current.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch((error) => {
+            console.log('Auto-play prevented by browser:', error.message);
+            // Auto-play was prevented, user will need to click play button
+            setIsPlaying(false);
+          });
+      }
     }
   }, [currentTrack, audioRef, setIsPlaying]);
 
@@ -113,6 +114,35 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
       audioRef.current.volume = volume;
     }
   }, [volume, audioRef]);
+
+  // Fallback: Try to play on any user interaction
+  useEffect(() => {
+    const handleInteraction = () => {
+      if (audioRef?.current && currentTrack && !isPlaying) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+          // Remove listeners after successful play
+          document.removeEventListener('click', handleInteraction);
+          document.removeEventListener('touchstart', handleInteraction);
+          document.removeEventListener('keydown', handleInteraction);
+        }).catch(() => {
+          // Still blocked, keep listeners
+        });
+      }
+    };
+
+    if (currentTrack && !isPlaying) {
+      document.addEventListener('click', handleInteraction);
+      document.addEventListener('touchstart', handleInteraction);
+      document.addEventListener('keydown', handleInteraction);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+  }, [audioRef, currentTrack, isPlaying, setIsPlaying]);
 
   const handlePlayPause = () => {
     if (!audioRef?.current || !currentTrack) return;
@@ -132,33 +162,11 @@ export default function MusicPlayer({ isBirthdayMode = false }: MusicPlayerProps
   const handleNext = () => {
     if (playlist.length === 0) return;
 
-    if (isShuffle) {
-      // Shuffle mode: pick random track that hasn't been played
-      const unplayedTracks = playlist.filter(
-        (track) => !playedTracks.has(track.id)
-      );
-
-      // If all tracks played, reset
-      if (unplayedTracks.length === 0) {
-        setPlayedTracks(new Set());
-        const randomIndex = Math.floor(Math.random() * playlist.length);
-        const nextTrack = playlist[randomIndex];
-        setCurrentTrack(nextTrack);
-        setPlayedTracks(new Set([nextTrack.id]));
-      } else {
-        const randomIndex = Math.floor(Math.random() * unplayedTracks.length);
-        const nextTrack = unplayedTracks[randomIndex];
-        setCurrentTrack(nextTrack);
-        setPlayedTracks((prev) => new Set([...prev, nextTrack.id]));
-      }
-    } else {
-      // Sequential mode
-      const currentIndex = playlist.findIndex(
-        (track) => track.id === currentTrack?.id
-      );
-      const nextIndex = (currentIndex + 1) % playlist.length;
-      setCurrentTrack(playlist[nextIndex]);
-    }
+    const currentIndex = playlist.findIndex(
+      (track) => track.id === currentTrack?.id
+    );
+    const nextIndex = (currentIndex + 1) % playlist.length;
+    setCurrentTrack(playlist[nextIndex]);
   };
 
   const handlePrevious = () => {

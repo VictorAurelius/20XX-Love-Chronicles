@@ -73,11 +73,6 @@ export default function EventDetail({ event }: EventDetailProps) {
     pauseMusic();
   }, [pauseMusic]);
 
-  // Handle video pause/ended - resume music
-  const handleVideoPauseOrEnd = useCallback(() => {
-    resumeMusic();
-  }, [resumeMusic]);
-
   // Pause all videos except the one at given index
   const pauseAllVideosExcept = useCallback((activeIndex: number) => {
     videoRefs.current.forEach((video, index) => {
@@ -87,12 +82,28 @@ export default function EventDetail({ event }: EventDetailProps) {
     });
   }, []);
 
-  // Handle swiper slide change - pause previous video
+  // Handle swiper slide change - pause previous video and auto-play new video
   const handleSlideChange = useCallback((swiper: SwiperType) => {
     const newIndex = swiper.activeIndex;
     pauseAllVideosExcept(newIndex);
     setCurrentVideoIndex(newIndex);
+
+    // Auto-play the new video
+    const newVideo = videoRefs.current.get(newIndex);
+    if (newVideo) {
+      newVideo.play().catch((error) => {
+        console.log('Auto-play video failed:', error.message);
+      });
+    }
   }, [pauseAllVideosExcept]);
+
+  // Resume music when leaving page (cleanup)
+  useEffect(() => {
+    return () => {
+      // When component unmounts, resume music
+      resumeMusic();
+    };
+  }, [resumeMusic]);
 
   return (
     <div className="min-h-screen bg-romantic-warmWhite">
@@ -255,8 +266,6 @@ export default function EventDetail({ event }: EventDetailProps) {
                           preload="metadata"
                           playsInline
                           onPlay={handleVideoPlay}
-                          onPause={handleVideoPauseOrEnd}
-                          onEnded={handleVideoPauseOrEnd}
                         >
                           <source src={src} type="video/mp4" />
                           Your browser does not support the video tag.
