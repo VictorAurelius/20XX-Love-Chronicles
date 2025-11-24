@@ -58,12 +58,12 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
 - **6 events thực tế** (đã tạo folders):
   - `2024-11-21_before-confession/` (~10 ảnh + 2 videos)
   - `2025-01-20_confession-day/` (~5 ảnh + 2 videos)
-  - `2025-03-01_memories-before-birthday/` (~20 ảnh + 2 videos)
-  - `2025-11-01_trip-ninh-binh/` (~10 ảnh + 2 videos) **🏞️ NEW EVENT**
+  - `2025-03-01_daily-memories/` (~20+ ảnh + 2+ videos) **📸 SPECIAL - Nhiều media nhất!**
+  - `2025-11-01_trip-ninh-binh/` (~10 ảnh + 2 videos) **🏞️**
   - `2025-09-30_boyfriend-birthday/` (~7 ảnh + 2 videos)
-  - `2025-12-10_girlfriend-birthday/` (~5 ảnh + 2 videos) **⭐ Trang chính - Special highlight**
+  - `2025-12-10_girlfriend-birthday/` (~5 ảnh + 2 videos) **⭐ Trang chính - Birthday special**
 
-**Tổng content**: ~57 ảnh + 12 videos (tất cả videos đều là vertical/portrait format 9:16)
+**Tổng content**: ~57+ ảnh + 12+ videos (tất cả videos đều là vertical/portrait format 9:16)
 
 #### File ảnh/video trong mỗi event:
 - **cover.jpg**: Ảnh đại diện (bắt buộc, 1200x800px landscape recommended)
@@ -230,7 +230,32 @@ Xây dựng website tĩnh couple timeline với Next.js (Static Export), hiển 
 - [ ] Navigation: Previous/Next event
 - [ ] Share button (optional)
 
-### Task 3.5: Event Countdown & Effects
+### Task 3.5: Daily Memories Event - Special Handling
+**Event đặc biệt**: `daily-memories` có nhiều ảnh/video nhất (~20+ ảnh, 2+ videos)
+
+- [ ] **Lazy loading advanced**:
+  - Load only first 5 ảnh initially
+  - Infinite scroll hoặc "Load More" button
+  - Preload next batch khi scroll gần cuối
+- [ ] **Gallery layout optimized**:
+  - Masonry grid cho ảnh (Pinterest style)
+  - Hoặc justified gallery (Google Photos style)
+  - Smooth transitions khi load thêm
+- [ ] **Video carousel/gallery** (CHI TIẾT BÊN DƯỚI):
+  - Separate section cho videos
+  - Swiper với vertical video cards
+  - Smooth swipe, snap to center
+  - Auto-pause khi swipe away
+- [ ] **Performance optimization**:
+  - Progressive image loading (blur placeholder → full)
+  - Video thumbnails with play button overlay
+  - Lazy load videos (chỉ load khi user scroll đến)
+- [ ] **UI indicators**:
+  - Show photo counter: "Photo 5 of 23"
+  - Video counter: "Video 1 of 3"
+  - Loading skeleton cho smooth experience
+
+### Task 3.6: Event Countdown & Effects
 - [ ] Countdown component hiển thị đếm ngược đến event
 - [ ] Trigger effects khi đến ngày event:
   - Fireworks canvas animation
