@@ -1,0 +1,28 @@
+{
+  "couple": {
+    "boy": {
+      "name": "Anh Yêu",
+      "avatar": "/data/avatars/avatar-boy.jpg",
+      "nickname": "My Love",
+      "birthday": "1998-09-30"
+    },
+    "girl": {
+      "name": "Em Yêu",
+      "avatar": "/data/avatars/avatar-girl.jpg",
+      "nickname": "My Baby",
+      "birthday": "1999-12-10"
+    },
+    "relationship": {
+      "startDate": "2025-01-20",
+      "motto": "Yêu nhau mỗi ngày! 💕",
+      "description": "Câu chuyện tình yêu của chúng mình...",
+      "status": "dating"
+    },
+    "metadata": {
+      "websiteTitle": "20XX Love Chronicles",
+      "websiteDescription": "Our beautiful love story, captured in moments",
+      "themeColor": "#FFB6C1",
+      "language": "vi"
+    }
+  }
+}

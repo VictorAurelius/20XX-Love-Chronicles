@@ -1,0 +1,61 @@
+{
+  "events": [
+    {
+      "id": "birthday-girl",
+      "type": "birthday",
+      "name": "Sinh Nhật Em Yêu",
+      "date": "12-10",
+      "recurring": true,
+      "isPrimaryEvent": true,
+      "showOnHomepage": true,
+      "effects": ["rose-petals", "hearts-float", "fireworks", "confetti"],
+      "musicFolder": "birthday",
+      "message": "Chúc mừng sinh nhật em yêu của anh! 💕",
+      "specialLayout": "hero-spotlight",
+      "backgroundColor": "#FFE4E1",
+      "colors": {
+        "primary": "#FFB6C1",
+        "secondary": "#E6E6FA",
+        "accent": "#FFD700"
+      }
+    },
+    {
+      "id": "birthday-boy",
+      "type": "birthday",
+      "name": "Sinh Nhật Anh",
+      "date": "09-30",
+      "recurring": true,
+      "isPrimaryEvent": false,
+      "showOnHomepage": false,
+      "effects": ["confetti", "fireworks"],
+      "musicFolder": "birthday",
+      "message": "Chúc mừng sinh nhật anh yêu! 🎂",
+      "specialLayout": "normal",
+      "backgroundColor": "#F0F8FF",
+      "colors": {
+        "primary": "#87CEEB",
+        "secondary": "#B0E0E6",
+        "accent": "#FFD700"
+      }
+    },
+    {
+      "id": "anniversary",
+      "type": "anniversary",
+      "name": "Kỷ Niệm Ngày Yêu",
+      "date": "01-20",
+      "recurring": true,
+      "isPrimaryEvent": false,
+      "showOnHomepage": true,
+      "effects": ["hearts-float", "rose-petals"],
+      "musicFolder": "normal",
+      "message": "Chúc mừng kỷ niệm ngày chúng mình yêu nhau! 💞",
+      "specialLayout": "normal",
+      "backgroundColor": "#FFF0F5",
+      "colors": {
+        "primary": "#C85A82",
+        "secondary": "#FFB6C1",
+        "accent": "#B76E79"
+      }
+    }
+  ]
+}
