@@ -10,7 +10,10 @@
       "Bash(curl:*)",
       "Bash(npm run build:*)",
       "Bash(/dev/null)",
-      "Bash(NODE_ENV=production npm run build:*)"
+      "Bash(NODE_ENV=production npm run build:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []

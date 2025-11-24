@@ -11,6 +11,10 @@ const nextConfig = {
   },
   // Disable server-side features for static export
   trailingSlash: true,
+  // Expose base path to client-side code
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? repoName : '',
+  },
 }
 
 module.exports = nextConfig

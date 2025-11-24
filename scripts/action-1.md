@@ -89,3 +89,18 @@ layout-626cdf104422fdfa.js:1 Auto-play prevented: play() failed because the user
 01-le-duong.mp3:1  Failed to load resource: the server responded with a status of 404 ()
 20XX-Love-Chronicles/timeline/index.txt?_rsc=19zvn:1  Failed to load resource: the server responded with a status of 404 ()
 20XX-Love-Chronicles/about/index.txt?_rsc=19zvn:1  Failed to load resource: the server responded with a status of 404 ()
+
+
+vẫn lỗi
+Failed to load resource: the server responded with a status of 404 ()
+cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+layout-626cdf104422fdfa.js:1 Auto-play prevented: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD
+cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+data/music/01-le-duong.mp3:1  Failed to load resource: the server responded with a status of 404 ()
+20XX-Love-Chronicles/timeline/index.txt?_rsc=19zvn:1  Failed to load resource: the server responded with a status of 404 ()
+20XX-Love-Chronicles/about/index.txt?_rsc=19zvn:1  Failed to load resource: the server responded with a status of 404 ()
+117-f71ccb93199bb2b6.js:1 Error playing audio: NotSupportedError: The element has no supported sources.
+push.2304.window.console.error @ 117-f71ccb93199bb2b6.js:1
+cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+cover.jpg:1  Failed to load resource: the server responded with a status of 404 ()
