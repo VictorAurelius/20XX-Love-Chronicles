@@ -77,15 +77,22 @@ function slugToTitle(slug) {
 function loadExistingData() {
   try {
     if (fs.existsSync(OUTPUT_FILE)) {
+      console.log('📖 Loading existing timeline data to preserve manual edits...');
       const data = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf-8'));
       // Create a map of existing events by ID for quick lookup
       const eventMap = {};
+      let feelingCount = 0;
       if (data.timeline && Array.isArray(data.timeline)) {
         data.timeline.forEach(event => {
           eventMap[event.id] = event;
+          if (event.feeling) feelingCount++;
         });
       }
+      console.log(`   ✅ Loaded ${Object.keys(eventMap).length} existing events`);
+      console.log(`   💭 Found ${feelingCount} events with feelings to preserve`);
       return eventMap;
+    } else {
+      console.log('ℹ️  No existing timeline data found, will create new file');
     }
   } catch (error) {
     console.log('⚠️  Could not load existing data:', error.message);
@@ -156,6 +163,7 @@ function generateTimelineData() {
 
     // Check if we have existing data for this event
     const existingEvent = existingEvents[parsed.slug];
+    const hasExistingFeeling = existingEvent?.feeling ? true : false;
 
     const event = {
       id: parsed.slug,
@@ -189,6 +197,11 @@ function generateTimelineData() {
 
     events.push(event);
 
+    // Log if feeling was preserved
+    if (hasExistingFeeling) {
+      console.log(`   💭 Preserved feeling for: ${event.title}`);
+    }
+
     // Log event info
     console.log(`${index + 1}. ${folderName}`);
     console.log(`   📅 Date: ${event.date}`);
@@ -219,10 +232,14 @@ function generateTimelineData() {
   // Write to JSON file
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(timelineData, null, 2));
 
+  // Count preserved feelings
+  const feelingsCount = events.filter(e => e.feeling).length;
+
   console.log('─'.repeat(50));
   console.log('✅ Timeline data generated successfully!');
   console.log(`📄 Output: ${OUTPUT_FILE}`);
   console.log(`📊 Total events: ${events.length}`);
+  console.log(`💭 Events with feelings: ${feelingsCount}`);
   console.log(`📸 Total images: ${events.reduce((sum, e) => sum + e.mediaCount.images, 0)}`);
   console.log(`🎥 Total videos: ${events.reduce((sum, e) => sum + e.mediaCount.videos, 0)}`);
   console.log('─'.repeat(50));

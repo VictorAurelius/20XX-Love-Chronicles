@@ -35,13 +35,52 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Debug - Check timeline data before generation
+        run: |
+          echo "📋 Checking existing timeline-data.json..."
+          if [ -f src/data/timeline-data.json ]; then
+            echo "✅ File exists"
+            echo "📊 Event count: $(cat src/data/timeline-data.json | grep -c '"id":')"
+            echo "💭 Feeling count: $(cat src/data/timeline-data.json | grep -c '"feeling":')"
+            echo ""
+            echo "First event feeling:"
+            cat src/data/timeline-data.json | grep -A 1 '"feeling":' | head -2
+          else
+            echo "❌ File does not exist"
+          fi
+
       - name: Generate timeline data
         run: node scripts/generate-timeline.js
+
+      - name: Debug - Check timeline data after generation
+        run: |
+          echo "📋 Checking timeline-data.json after generation..."
+          if [ -f src/data/timeline-data.json ]; then
+            echo "✅ File exists"
+            echo "📊 Event count: $(cat src/data/timeline-data.json | grep -c '"id":')"
+            echo "💭 Feeling count: $(cat src/data/timeline-data.json | grep -c '"feeling":')"
+            echo ""
+            echo "Sample feelings preserved:"
+            cat src/data/timeline-data.json | grep -A 1 '"feeling":' | head -6
+          else
+            echo "❌ File does not exist"
+          fi
 
       - name: Build Next.js application
         run: npm run build
         env:
           NODE_ENV: production
+
+      - name: Debug - Check build output
+        run: |
+          echo "📦 Checking build output..."
+          ls -la out/
+          if [ -f out/_next/static/chunks/*.js ]; then
+            echo "✅ JS chunks generated"
+          fi
+          echo ""
+          echo "Checking if feeling data is in build:"
+          grep -r "Mỗi khoảnh khắc bên em" out/ || echo "⚠️ Sample feeling text not found in build"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -204,3 +204,8 @@ Run node scripts/generate-timeline.js
 📸 Total images: 40
 🎥 Total videos: 12
 ──────────────────────────────────────────────────
+
+khi deploy lên github pages vẫn không hiện "cảm nhận":
+favicon.ico:1  GET https://victoraurelius.github.io/favicon.ico 404 (Not Found)
+
+hãy fix, chủ yếu vào quy trình deploy, đặt log để khi deploy có thể debug
