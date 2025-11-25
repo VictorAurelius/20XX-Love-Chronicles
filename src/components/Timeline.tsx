@@ -139,7 +139,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
       {/* Feeling/Reflection section - opposite side */}
       {event.feeling && (
         <motion.div
-          className={`hidden md:block md:w-5/12 ${isLeft ? 'md:text-left' : 'md:text-right'}`}
+          className={`w-full md:w-5/12 ${isLeft ? 'md:text-left' : 'md:text-right'}`}
           variants={cardVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}

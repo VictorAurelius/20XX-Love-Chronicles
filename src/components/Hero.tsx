@@ -49,7 +49,7 @@ export default function Hero() {
   if (!mounted) return null;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 pb-32">
       {/* Background gradient */}
       <div className="absolute inset-0 gradient-romantic-3 opacity-30" />
 
@@ -131,7 +131,7 @@ export default function Hero() {
         </motion.p>
 
         {/* CTA Button */}
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} className="mb-16">
           <motion.a
             href="#timeline"
             className="inline-block btn-romantic text-lg px-8 py-4"
@@ -144,7 +144,7 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
           animate={{
             y: [0, 10, 0],
           }}

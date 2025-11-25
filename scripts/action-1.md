@@ -137,3 +137,7 @@ bạn có thể đọc scripts/op-1.png để xem hết quả thực tế
 quá xấu, icon cảm nhận to hơn cả chữ, không bằng nhau và text cũng không đẹp, hãy trình bày đẹp hơn, tinh tế hơn
 
 font chữ quá xấu, đổi font khác đẹp hơn
+
+khi deploy lên thì không thấy phần "cảm nhận"
+
+phần hero text bị mất phần cuối chữ, nên mở rộng vùng ra
