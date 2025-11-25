@@ -175,7 +175,7 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
                 <blockquote className={`relative ${isLeft ? 'text-left' : 'text-right'}`}>
                   {/* Subtle decorative quote mark */}
                   <span className="absolute -top-4 -left-2 text-6xl text-romantic-rose/20 font-serif leading-none">
-                    "
+                    &ldquo;
                   </span>
 
                   <p className="text-xl md:text-2xl leading-relaxed text-gray-800 font-heading font-normal relative z-10 px-4">
