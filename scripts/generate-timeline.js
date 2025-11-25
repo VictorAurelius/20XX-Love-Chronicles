@@ -73,9 +73,32 @@ function slugToTitle(slug) {
     .join(' ');
 }
 
+// Helper: Load existing timeline data to preserve manual edits
+function loadExistingData() {
+  try {
+    if (fs.existsSync(OUTPUT_FILE)) {
+      const data = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf-8'));
+      // Create a map of existing events by ID for quick lookup
+      const eventMap = {};
+      if (data.timeline && Array.isArray(data.timeline)) {
+        data.timeline.forEach(event => {
+          eventMap[event.id] = event;
+        });
+      }
+      return eventMap;
+    }
+  } catch (error) {
+    console.log('⚠️  Could not load existing data:', error.message);
+  }
+  return {};
+}
+
 // Main function to generate timeline data
 function generateTimelineData() {
   console.log('🔍 Scanning timeline folders...\n');
+
+  // Load existing data to preserve manual edits
+  const existingEvents = loadExistingData();
 
   // Check if timeline directory exists
   if (!fs.existsSync(TIMELINE_DIR)) {
@@ -131,12 +154,19 @@ function generateTimelineData() {
     const media = getMediaFiles(folderPath);
     const note = readNote(folderPath);
 
+    // Check if we have existing data for this event
+    const existingEvent = existingEvents[parsed.slug];
+
     const event = {
       id: parsed.slug,
       date: parsed.date,
-      title: slugToTitle(parsed.slug),
-      description: note || `Memories from ${slugToTitle(parsed.slug)}`,
-      location: '', // Can be extracted from note or filename in future
+      // Preserve manually edited title or use generated one
+      title: existingEvent?.title || slugToTitle(parsed.slug),
+      // Preserve manually edited description or use note/generated one
+      description: existingEvent?.description || note || `Memories from ${slugToTitle(parsed.slug)}`,
+      // Preserve manually edited feeling
+      feeling: existingEvent?.feeling || undefined,
+      location: existingEvent?.location || '', // Preserve existing location
       folder: folderName,
       mediaCount: {
         images: media.images.length,
@@ -149,8 +179,13 @@ function generateTimelineData() {
       },
       hasCover: media.hasCover,
       hasNote: media.hasNote,
-      tags: [], // Can be auto-generated based on slug keywords
+      tags: existingEvent?.tags || [], // Preserve existing tags
     };
+
+    // Remove undefined feeling field if not present
+    if (!event.feeling) {
+      delete event.feeling;
+    }
 
     events.push(event);
 

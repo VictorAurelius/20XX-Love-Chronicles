@@ -141,3 +141,66 @@ font chữ quá xấu, đổi font khác đẹp hơn
 khi deploy lên thì không thấy phần "cảm nhận"
 
 phần hero text bị mất phần cuối chữ, nên mở rộng vùng ra
+
+ý tôi là khi deploy lên github pages bằng github action thì nó không hiển thị "cảm nhận"
+
+Run node scripts/generate-timeline.js
+🔍 Scanning timeline folders...
+
+📂 Found 6 folder(s):
+
+1. 2024-11-21_before-confession
+   📅 Date: 2024-11-21
+   📖 Title: Before Confession
+   🖼️  Images: 6
+   🎥 Videos: 0
+   ✅ Cover image
+   ❌ Note file
+
+2. 2025-01-20_confession-day
+   📅 Date: 2025-01-20
+   📖 Title: Confession Day
+   🖼️  Images: 0
+   🎥 Videos: 1
+   ✅ Cover image
+   ❌ Note file
+
+3. 2025-03-01_daily-memories
+   📅 Date: 2025-03-01
+   📖 Title: Daily Memories
+   🖼️  Images: 23
+   🎥 Videos: 8
+   ✅ Cover image
+   ❌ Note file
+
+4. 2025-09-30_boyfriend-birthday
+   📅 Date: 2025-09-30
+   📖 Title: Boyfriend Birthday
+   🖼️  Images: 1
+   🎥 Videos: 1
+   ✅ Cover image
+   ❌ Note file
+
+5. 2025-11-01_trip-ninh-binh
+   📅 Date: 2025-11-01
+   📖 Title: Trip Ninh Binh
+   🖼️  Images: 4
+   🎥 Videos: 2
+   ✅ Cover image
+   ❌ Note file
+
+6. 2025-12-10_girlfriend-birthday
+   📅 Date: 2025-12-10
+   📖 Title: Girlfriend Birthday
+   🖼️  Images: 6
+   🎥 Videos: 0
+   ✅ Cover image
+   ❌ Note file
+
+──────────────────────────────────────────────────
+✅ Timeline data generated successfully!
+📄 Output: /home/runner/work/20XX-Love-Chronicles/20XX-Love-Chronicles/src/data/timeline-data.json
+📊 Total events: 6
+📸 Total images: 40
+🎥 Total videos: 12
+──────────────────────────────────────────────────
