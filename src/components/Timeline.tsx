@@ -200,7 +200,8 @@ function TimelineCard({ event, index }: { event: TimelineEvent; index: number })
 }
 
 export default function Timeline() {
-  const events = timelineData.timeline as TimelineEvent[];
+  // Reverse the timeline to show newest first
+  const events = [...(timelineData.timeline as TimelineEvent[])].reverse();
 
   return (
     <section className="relative py-20">

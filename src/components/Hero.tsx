@@ -144,7 +144,7 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-16 right-8 md:right-16"
           animate={{
             y: [0, 10, 0],
           }}

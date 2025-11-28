@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
+import Masonry from 'react-masonry-css';
 import { formatDate } from '@/lib/date-utils';
 import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
@@ -46,6 +47,7 @@ export default function EventDetail({ event }: EventDetailProps) {
   const [images, setImages] = useState<string[]>([]);
   const [videos, setVideos] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'photos' | 'videos'>('photos');
   const { pauseMusic } = useMusic();
   const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
 
@@ -67,6 +69,13 @@ export default function EventDetail({ event }: EventDetailProps) {
       (filename) => getDataPath(`timeline/${event.folder}/${filename}`)
     );
     setVideos(videoUrls);
+
+    // Set default tab based on available media
+    if (imageUrls.length > 0) {
+      setActiveTab('photos');
+    } else if (videoUrls.length > 0) {
+      setActiveTab('videos');
+    }
   }, [event]);
 
   const isDailyMemories = event.id === 'daily-memories';
@@ -292,114 +301,124 @@ export default function EventDetail({ event }: EventDetailProps) {
         </section>
       )}
 
-      {/* Photo Gallery */}
-      {images.length > 0 && (
+      {/* Media Gallery with Tabs */}
+      {(images.length > 0 || videos.length > 0) && (
         <section className="py-16">
           <div className="container-custom">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-8 text-center">
-              Ảnh 📸
-            </h2>
-
-            {isDailyMemories ? (
-              // Masonry grid for Daily Memories (special handling)
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {images.map((src, index) => (
-                  <motion.div
-                    key={index}
-                    className="relative aspect-square rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300 shadow-romantic"
-                    onClick={() => setSelectedImage(src)}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05, duration: 0.4 }}
+            {/* Tab selector */}
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex bg-white rounded-full p-1 shadow-romantic">
+                {images.length > 0 && (
+                  <button
+                    onClick={() => setActiveTab('photos')}
+                    className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                      activeTab === 'photos'
+                        ? 'bg-gradient-romantic-1 text-romantic-deepRose shadow-md'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
                   >
-                    <Image
-                      src={src}
-                      alt={`${event.title} - Photo ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    />
-                  </motion.div>
-                ))}
+                    📸 Ảnh ({images.length})
+                  </button>
+                )}
+                {videos.length > 0 && (
+                  <button
+                    onClick={() => setActiveTab('videos')}
+                    className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                      activeTab === 'videos'
+                        ? 'bg-gradient-romantic-1 text-romantic-deepRose shadow-md'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
+                  >
+                    🎥 Video ({videos.length})
+                  </button>
+                )}
               </div>
-            ) : (
-              // Swiper carousel for other events
-              <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={20}
-                slidesPerView={1}
-                navigation
-                pagination={{ clickable: true }}
-                breakpoints={{
-                  640: { slidesPerView: 2 },
-                  1024: { slidesPerView: 3 },
-                }}
-                className="rounded-xl"
-              >
-                {images.map((src, index) => (
-                  <SwiperSlide key={index}>
-                    <div
-                      className="relative aspect-square rounded-lg overflow-hidden cursor-pointer shadow-romantic"
-                      onClick={() => setSelectedImage(src)}
-                    >
-                      <Image
-                        src={src}
-                        alt={`${event.title} - Photo ${index + 1}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
-          </div>
-        </section>
-      )}
-
-      {/* Video Gallery */}
-      {videos.length > 0 && (
-        <section className="py-16 bg-romantic-softGray">
-          <div className="container-custom">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-8 text-center">
-              Video 🎥
-            </h2>
-
-            <div className="max-w-2xl mx-auto">
-              <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={30}
-                slidesPerView={1}
-                navigation
-                pagination={{ clickable: true }}
-                onSlideChange={handleSlideChange}
-                className="vertical-video-swiper"
-              >
-                {videos.map((src, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="flex justify-center">
-                      <div className="relative w-full max-w-md aspect-[9/16] rounded-xl overflow-hidden shadow-romantic-lg bg-black">
-                        <video
-                          ref={(el) => {
-                            if (el) videoRefs.current.set(index, el);
-                          }}
-                          controls
-                          className="w-full h-full object-contain"
-                          preload="metadata"
-                          playsInline
-                          onPlay={handleVideoPlay}
-                        >
-                          <source src={src} type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
             </div>
+
+            {/* Photo Gallery - Masonry Style */}
+            {activeTab === 'photos' && images.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Masonry
+                  breakpointCols={{
+                    default: 4,
+                    1100: 3,
+                    700: 2,
+                    500: 2
+                  }}
+                  className="flex -ml-4 w-auto"
+                  columnClassName="pl-4 bg-clip-padding"
+                >
+                  {images.map((src, index) => (
+                    <motion.div
+                      key={index}
+                      className="mb-4 cursor-pointer group"
+                      onClick={() => setSelectedImage(src)}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05, duration: 0.4 }}
+                    >
+                      <div className="relative rounded-lg overflow-hidden shadow-romantic hover:shadow-romantic-lg transition-all duration-300 group-hover:scale-[1.02]">
+                        <Image
+                          src={src}
+                          alt={`${event.title} - Photo ${index + 1}`}
+                          width={400}
+                          height={600}
+                          className="w-full h-auto object-cover"
+                          sizes="(max-width: 500px) 50vw, (max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+                </Masonry>
+              </motion.div>
+            )}
+
+            {/* Video Gallery */}
+            {activeTab === 'videos' && videos.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="max-w-2xl mx-auto"
+              >
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={30}
+                  slidesPerView={1}
+                  navigation
+                  pagination={{ clickable: true }}
+                  onSlideChange={handleSlideChange}
+                  className="vertical-video-swiper"
+                >
+                  {videos.map((src, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="flex justify-center">
+                        <div className="relative w-full max-w-md aspect-[9/16] rounded-xl overflow-hidden shadow-romantic-lg bg-black">
+                          <video
+                            ref={(el) => {
+                              if (el) videoRefs.current.set(index, el);
+                            }}
+                            controls
+                            className="w-full h-full object-contain"
+                            preload="metadata"
+                            playsInline
+                            onPlay={handleVideoPlay}
+                          >
+                            <source src={src} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </motion.div>
+            )}
           </div>
         </section>
       )}

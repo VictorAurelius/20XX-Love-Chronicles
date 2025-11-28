@@ -209,3 +209,12 @@ khi deploy lên github pages vẫn không hiện "cảm nhận":
 favicon.ico:1  GET https://victoraurelius.github.io/favicon.ico 404 (Not Found)
 
 hãy fix, chủ yếu vào quy trình deploy, đặt log để khi deploy có thể debug
+
+hãy đọc readme để hiểu context của repo
+tôi muốn thực hiện 1 số chỉnh sửa sau:
+1. chữ cuộn xuống ở home đang bị che, hãy dịch hẳn nó sang phải
+2. chỉnh sửa thứ tự timeline ngược lại (mới nhất trước) ở home
+3. ở mỗi events thêm chọn tab ảnh hoặc video
+4. ở mỗi events, ảnh hiển thị dạng giống gallerys
+
+hiển thị giống gallery là các ảnh sẽ đúng kích thước và khớp nhau, đó chính là kiểu Masonry
