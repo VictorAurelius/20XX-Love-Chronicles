@@ -79,7 +79,6 @@ export default function EventDetail({ event }: EventDetailProps) {
     }
   }, [event]);
 
-  const isDailyMemories = event.id === 'daily-memories';
   const isBirthdayEvent =
     event.id === 'boyfriend-birthday' || event.id === 'girlfriend-birthday';
   const isBoyBirthday = event.id === 'boyfriend-birthday';
