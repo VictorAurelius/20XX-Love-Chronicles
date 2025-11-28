@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
-import Masonry from 'react-masonry-css';
 import { formatDate } from '@/lib/date-utils';
 import { getDataPath } from '@/lib/asset-utils';
 import timelineData from '@/data/timeline-data.json';
@@ -73,8 +72,10 @@ export default function EventDetail({ event }: EventDetailProps) {
     // Set default tab based on available media
     if (imageUrls.length > 0) {
       setActiveTab('photos');
+      console.log('EventDetail: Set tab to photos, images:', imageUrls.length);
     } else if (videoUrls.length > 0) {
       setActiveTab('videos');
+      console.log('EventDetail: Set tab to videos, videos:', videoUrls.length);
     }
   }, [event]);
 
@@ -335,46 +336,38 @@ export default function EventDetail({ event }: EventDetailProps) {
               </div>
             </div>
 
-            {/* Photo Gallery - Masonry Style */}
+            {/* Photo Gallery - Masonry Style (CSS Columns) */}
             {activeTab === 'photos' && images.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
+                className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4"
+                onAnimationComplete={() => console.log('Masonry gallery rendered with', images.length, 'images')}
               >
-                <Masonry
-                  breakpointCols={{
-                    default: 4,
-                    1100: 3,
-                    700: 2,
-                    500: 2
-                  }}
-                  className="flex -ml-4 w-auto"
-                  columnClassName="pl-4 bg-clip-padding"
-                >
-                  {images.map((src, index) => (
-                    <motion.div
-                      key={index}
-                      className="mb-4 cursor-pointer group"
-                      onClick={() => setSelectedImage(src)}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.05, duration: 0.4 }}
-                    >
-                      <div className="relative rounded-lg overflow-hidden shadow-romantic hover:shadow-romantic-lg transition-all duration-300 group-hover:scale-[1.02]">
-                        <Image
-                          src={src}
-                          alt={`${event.title} - Photo ${index + 1}`}
-                          width={400}
-                          height={600}
-                          className="w-full h-auto object-cover"
-                          sizes="(max-width: 500px) 50vw, (max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </Masonry>
+                {images.map((src, index) => (
+                  <motion.div
+                    key={index}
+                    className="mb-4 break-inside-avoid cursor-pointer group"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05, duration: 0.4 }}
+                    onClick={() => setSelectedImage(src)}
+                  >
+                    <div className="relative rounded-lg overflow-hidden shadow-romantic group-hover:shadow-romantic-lg transition-shadow duration-300">
+                      <Image
+                        src={src}
+                        alt={`${event.title} - Photo ${index + 1}`}
+                        width={500}
+                        height={500}
+                        className="w-full h-auto"
+                        style={{ display: 'block' }}
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      />
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             )}
 

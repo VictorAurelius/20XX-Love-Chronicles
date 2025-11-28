@@ -15,7 +15,8 @@
       "Bash(xargs kill:*)",
       "Bash(pkill:*)",
       "Bash(cat:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []

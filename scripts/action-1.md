@@ -218,3 +218,28 @@ tôi muốn thực hiện 1 số chỉnh sửa sau:
 4. ở mỗi events, ảnh hiển thị dạng giống gallerys
 
 hiển thị giống gallery là các ảnh sẽ đúng kích thước và khớp nhau, đó chính là kiểu Masonry
+
+vẫn chưa có Masonry layout cho event?, hãy xem lại layout giữa event với gallery đang khác nhau
+
+vẫn chưa được
+
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+MusicContext.tsx:55 Auto-play prevented: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD
+warn-once.js:16 Image with src "/data/timeline/2024-11-21_before-confession/01.jpg" was detected as the Largest Contentful Paint (LCP). Please add the "priority" property if this image is above the fold.
+Read more: https://nextjs.org/docs/api-reference/next/image#priority
+warnOnce @ warn-once.js:16Understand this warning
+hot-reloader-client.js:187 [Fast Refresh] rebuilding
+hot-reloader-client.js:44 [Fast Refresh] done in 739ms
+
+layout của event vẫn chưa cập nhật sang dạng Masonry
+
+AzureAD+NguyenVanKiet@NguyenVanKiet MINGW64 /e/person/20XX-Love-Chronicles (main)
+$ npm run dev
+
+> love-chronicles@0.1.0 dev
+> next dev
+
+'next' is not recognized as an internal or external command,
+operable program or batch file.
+
+sao tôi bị lỗi này
